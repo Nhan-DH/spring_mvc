@@ -9,9 +9,9 @@ import org.springframework.context.ApplicationContext;
 public class SpringMvcApplication {
 
 	public static void main(String[] args) {
-		//container
-		 SpringApplication.run(SpringMvcApplication.class, args);
-		
+		// container
+		SpringApplication.run(SpringMvcApplication.class, args);
+
 	}
 
 }
