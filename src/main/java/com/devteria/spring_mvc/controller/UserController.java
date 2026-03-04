@@ -1,5 +1,7 @@
 package com.devteria.spring_mvc.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devteria.spring_mvc.domain.User;
+import com.devteria.spring_mvc.repository.UserRepository;
 import com.devteria.spring_mvc.service.UserService;
 
 import jakarta.annotation.PostConstruct;
@@ -18,7 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
-    private UserService userService;
+    private final UserService userService;
 
     // code theo injection
     // chuot phai -> source action -> generate constructor using fields -> chon
@@ -29,20 +32,28 @@ public class UserController {
 
     @RequestMapping("/")
     public String getHomePage(Model model) {
-        String test = this.userService.handleHello();
-        model.addAttribute("dona", test);
+        model.addAttribute("dona", "test");
         return "hello";
     }
 
-    @GetMapping("/admin/user")
+    @GetMapping("/admin/user/create")
     public String getForm(Model model) {
         model.addAttribute("newUser", new User());
         return "admin/user/form";
     }
 
     @PostMapping("/admin/user/create")
-    public String createForm(Model model, @ModelAttribute("newUser") User user) {
-        System.out.println("form submitted" + user);
-        return "hello";
+    public String createUserForm(Model model, @ModelAttribute("newUser") User hoidanit) {
+        System.out.println("form submitted" + hoidanit);
+        this.userService.handleSaveUser(hoidanit);
+        return "redirect:/admin/user";
     }
+
+    @RequestMapping(value = "/admin/user", method = RequestMethod.GET)
+    public String userTable(Model model) {
+        List<User> users = this.userService.getAllUsers();
+        model.addAttribute("users", users);
+        return "admin/user/user_table";
+    }
+
 }
