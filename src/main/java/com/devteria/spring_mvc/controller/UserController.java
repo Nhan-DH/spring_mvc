@@ -17,7 +17,9 @@ import jakarta.annotation.PostConstruct;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class UserController {
@@ -54,6 +56,39 @@ public class UserController {
         List<User> users = this.userService.getAllUsers();
         model.addAttribute("users", users);
         return "admin/user/user_table";
+    }
+
+    @GetMapping("admin/user/{id}")
+    public String getUserDetailPage(Model model, @PathVariable long id) {
+        model.addAttribute("id", id);
+
+        model.addAttribute("user", this.userService.getUserById(id));
+        return "admin/user/show";
+    }
+
+    @GetMapping("admin/user/edit/{id}")
+    public String editUser(Model model, @PathVariable long id) {
+        model.addAttribute("newUser", this.userService.getUserById(id));
+        model.addAttribute("id", id);
+        return "admin/user/edit";
+    }
+
+    @PostMapping("admin/user/edit/{id}")
+    public String postMethodName(Model model, @ModelAttribute("newUser") User newUser) {
+        this.userService.updatUser(newUser);
+        return "redirect:/admin/user";
+    }
+
+    @GetMapping("admin/user/delete/{id}")
+    public String deleteUser(Model model, @PathVariable long id) {
+        model.addAttribute("id", id);
+        return "admin/user/delete";
+    }
+
+    @PostMapping("admin/user/delete/{id}")
+    public String postDeleteUser(@PathVariable long id) {
+        this.userService.deleteUser(id);
+        return "redirect:/admin/user";
     }
 
 }

@@ -19,7 +19,19 @@ public class UserService {
         return this.userRepository.save(user);
     }
 
+    public User getUserById(long id) {
+        return this.userRepository.findById(id);
+    }
+
     public List<User> getAllUsers() {
         return this.userRepository.findAll();
+    }
+
+    public User updatUser(User user) {
+        return this.userRepository.save(user);
+    }
+
+    public User deleteUser(long id) {
+        return this.userRepository.deleteById(id);
     }
 }

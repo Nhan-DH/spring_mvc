@@ -37,9 +37,9 @@
                             <td>${user.phoneNumber}</td>
                             <td>${user.address}</td>
                             <td>
-                                <button class = "btn btn-info">View</button>
-                                <button class = "btn btn-warning">Edit</button>
-                                <button class = "btn btn-danger">Delete</button>
+                                <a href="/admin/user/${user.id}" class = "btn btn-info">View</a>
+                                <a href="/admin/user/edit/${user.id}" class = "btn btn-warning">Edit</a>
+                                <a href="/admin/user/delete/${user.id}" class = "btn btn-danger">Delete</a>
                             </td>
                         </tr>
                     </c:forEach>

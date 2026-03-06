@@ -1,6 +1,5 @@
 package com.devteria.spring_mvc.config;
 
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties.View;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
@@ -10,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.lang.NonNull;
 
 @Configuration
 @EnableWebMvc
@@ -24,14 +24,17 @@ public class WebmvcConfig implements WebMvcConfigurer {
     }
 
     @Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
+    public void configureViewResolvers(@NonNull ViewResolverRegistry registry) {
         registry.viewResolver(viewResolver());
     }
 
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    public void addResourceHandlers(@NonNull ResourceHandlerRegistry registry) {
         registry
                 .addResourceHandler("/css/**")
                 .addResourceLocations("/resources/css/");
+        registry
+                .addResourceHandler("/js/**")
+                .addResourceLocations("/resources/js/");
     }
 }
