@@ -28,6 +28,7 @@
                         </ol>
                     </div>
                   <div class = "container mt-5">
+        <div class = "container mt-5">
         <div class="row">
            <div class="col-12 mx-auto">
              <div class = "d-flex justify-content-between align-items-center mb-3">
@@ -35,11 +36,17 @@
                 <h1>Information for User ID: ${id}</h1>
              </div>
              <hr />
-              <h1>Are you sure want to delete user with ID : ${id}</h1>
-           <form:form action="/admin/user/delete/${id}" method="post" >
-           <button type="submit" class="btn btn-danger" style = "margin-top: 20px; width : 100px">Comfirm</button>
-           </form:form>
-           <button onclick="window.location.href='/admin/user'" class="btn btn-secondary" style = "margin-top: 20px; width : 100px">Cancel</button>
+              <div class = "card" style = " width: 18rem;">
+                <div class = "card-body">
+                    <h5 class = "card-title">Full Name: ${user.fullName}</h5>
+                    <p class = "card-text">Email: ${user.email}</p>
+                    <p class = "card-text">Phone Number: ${user.phoneNumber}</p>
+                    <p class = "card-text">Address: ${user.address}</p>
+                </div>
+                
+              </div>
+           </div>
+           <button onclick="window.location.href='/admin/user'" class="btn btn-primary" style = "margin-top: 20px; width : 100px">Return</button>
     </div>
 
                 </main>

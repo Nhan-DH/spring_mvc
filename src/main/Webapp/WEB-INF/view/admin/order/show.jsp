@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Create User</title>
+        <title>Dashboard - SB Admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="/css/style.css">
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -20,28 +19,7 @@
             <jsp:include page="../layout/sidebar.jsp" />
             <div id="layoutSidenav_content">
                 <main>
-                    <div class = "ms-5" >
-                        <h1>User Management</h1>
-                        <ol class = "breadcrumb mb-4">
-                            <li class="breadcrumb>-item"><a href="/admin">Dashboard/</a></li>
-                            <li class="breadcrumb-item active">User</li>
-                        </ol>
-                    </div>
-                  <div class = "container mt-5">
-        <div class="row">
-           <div class="col-12 mx-auto">
-             <div class = "d-flex justify-content-between align-items-center mb-3">
-                <h3>User Detail</h3>
-                <h1>Information for User ID: ${id}</h1>
-             </div>
-             <hr />
-              <h1>Are you sure want to delete user with ID : ${id}</h1>
-           <form:form action="/admin/user/delete/${id}" method="post" >
-           <button type="submit" class="btn btn-danger" style = "margin-top: 20px; width : 100px">Comfirm</button>
-           </form:form>
-           <button onclick="window.location.href='/admin/user'" class="btn btn-secondary" style = "margin-top: 20px; width : 100px">Cancel</button>
-    </div>
-
+                    <div>Order Details</div>
                 </main>
                <jsp:include page="../layout/footer.jsp" />
             </div>
