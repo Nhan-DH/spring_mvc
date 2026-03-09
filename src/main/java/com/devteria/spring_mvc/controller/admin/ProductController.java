@@ -49,35 +49,48 @@ public class ProductController {
     }
 
     @PostMapping("/admin/product/create")
-    public String createProduct(Model model,
-            @ModelAttribute("newProduct") @Valid Product product,
-            BindingResult newProductBindingResult,
+    public String createProduct(
+            Model model,
+            @ModelAttribute("newProduct") @Valid Product newProduct,
+            BindingResult result,
             @RequestParam("productFile") MultipartFile imageFile) {
-
-        // validate
-        if (newProductBindingResult.hasErrors()) {
+        if (result.hasErrors()) {
             return "admin/product/create";
         }
-
-        String image = this.uploadService.handleUploadFile(imageFile, "product");
-        product.setImage(image);
-        this.productService.save(product);
+        if (!imageFile.isEmpty()) {
+            String image = uploadService.handleUploadFile(imageFile, "image");
+            newProduct.setImage(image);
+        }
+        productService.save(newProduct);
         return "redirect:/admin/product";
     }
 
     @GetMapping("/admin/product/update/{id}")
-    public String getUpdateForm(Model model, @ModelAttribute("newProduct") Product newProduct, @PathVariable long id) {
-
-        Product currentProduct = productService.getProductById(id);
-
-        model.addAttribute("newProduct", this.productService.getProductById(id));
+    public String getUpdateForm(Model model, @PathVariable long id) {
         model.addAttribute("id", id);
+        model.addAttribute("newProduct", this.productService.getProductById(id));
         return "admin/product/update";
     }
 
-    @PostMapping("admin/product/update/{id}")
-    public String postUploadString(Model model, @ModelAttribute("newProduct") Product newProduct) {
-        this.productService.updateProduct(newProduct);
+    @PostMapping("/admin/product/update/{id}")
+    public String updateProduct(
+            Model model,
+            @ModelAttribute("newProduct") @Valid Product newProduct,
+            BindingResult result,
+            @RequestParam("productFile") MultipartFile imageFile,
+            @PathVariable long id) {
+        if (result.hasErrors()) {
+            return "admin/product/update";
+        }
+        Product curProduct = productService.getProductById(id);
+        newProduct.setId(id);
+        if (!imageFile.isEmpty()) {
+            String image = uploadService.handleUploadFile(imageFile, "image");
+            newProduct.setImage(image);
+        } else {
+            newProduct.setImage(curProduct.getImage());
+        }
+        productService.updateProduct(newProduct);
         return "redirect:/admin/product";
     }
 

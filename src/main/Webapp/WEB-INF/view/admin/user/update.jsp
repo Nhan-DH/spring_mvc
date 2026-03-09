@@ -20,7 +20,7 @@
             const file = $('#avatarFile');
             const orgImage = "${newUser.avatar}"
             if (orgImage) {
-              const url = "images/avatar/" + orgImage;
+              const url = "/images/avatar/" + orgImage;
               $("#avatarPreview").attr("src", url);
               $("#avatarPreview").css({ "display": "block" });
             }
@@ -105,7 +105,7 @@
                           name="avatarFile" />
                       </div>
                       <div class="col-12 mb-3">
-                        <img style="display:none; max-height:200px;" alt="avatar preview" id="avatarPreview">
+                        <img style="max-height:200px;" alt="avatar preview" id="avatarPreview">
                       </div>
                     </div>
                   </div>

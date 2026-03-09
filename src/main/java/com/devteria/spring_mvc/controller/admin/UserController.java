@@ -110,26 +110,29 @@ public class UserController {
         return "admin/user/update";
     }
 
-    @PostMapping("admin/user/update/{id}")
-    public String postMethodName(Model model, @ModelAttribute("newUser") User newUser, @PathVariable long id,
-            BindingResult newUserBindingResult,
+    @PostMapping("/admin/user/update/{id}")
+    public String updateUser(
+            Model model,
+            @ModelAttribute("newUser") User newUser,
+            @PathVariable long id,
+            BindingResult result,
             @RequestParam("avatarFile") MultipartFile avatarFile) {
-        // validate
-        List<FieldError> errors = newUserBindingResult.getFieldErrors();
-        for (FieldError error : errors) {
-            System.out.println(">>>>>>>>>>" + error.getField() + " - " + error.getDefaultMessage());
+        if (result.hasErrors()) {
+            return "admin/user/update";
         }
-
-        if (newUserBindingResult.hasErrors()) {
-            return "admin/user/create";
-        }
-        //
-
-        String avatar = this.uploadService.handleUploadFile(avatarFile, "avatar");
         User currentUser = userService.getUserById(id);
+        // giữ password cũ
         newUser.setPassword(currentUser.getPassword());
-        newUser.setRole(this.userService.getRoleByName(newUser.getRole().getName()));
-        this.userService.updatUser(newUser);
+        // xử lý avatar
+        if (!avatarFile.isEmpty()) {
+            String avatar = uploadService.handleUploadFile(avatarFile, "avatar");
+            newUser.setAvatar(avatar);
+        } else {
+            // giữ avatar cũ
+            newUser.setAvatar(currentUser.getAvatar());
+        }
+        newUser.setRole(userService.getRoleByName(newUser.getRole().getName()));
+        userService.updatUser(newUser);
         return "redirect:/admin/user";
     }
 

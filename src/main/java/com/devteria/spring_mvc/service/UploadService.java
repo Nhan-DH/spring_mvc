@@ -22,6 +22,7 @@ public class UploadService {
         }
         String rootPath = this.servletContext.getRealPath("/resources/images/");
         String finalName = "";
+        String fileName = file.getOriginalFilename();
         try {
             byte[] bytes = file.getBytes();
 
@@ -29,7 +30,7 @@ public class UploadService {
             if (!dir.exists()) {
                 dir.mkdirs();
             }
-            finalName = file.getOriginalFilename();
+            finalName = dir.getAbsolutePath() + File.separator + file.getOriginalFilename();
             File serverFile = new File(finalName);
             BufferedOutputStream stream = new BufferedOutputStream(new java.io.FileOutputStream(serverFile));
             stream.write(bytes);
@@ -37,7 +38,7 @@ public class UploadService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return finalName;
+        return fileName;
     }
 
 }
