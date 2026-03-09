@@ -8,7 +8,7 @@ import ch.qos.logback.core.model.Model;
 
 @Controller
 public class ItemController {
-    @GetMapping("/product/{id}")
+    @GetMapping("client/product/{id}")
     public String getProductPage(Model model, @PathVariable long id) {
         return "client/product/show";
     }

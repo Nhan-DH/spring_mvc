@@ -9,17 +9,28 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NotNull
+
+    @Email(message = "Email is not valid", regexp = "^[A-Za-z0-9+_.-]+@gmail\\.com$")
     private String email;
+    @NotNull
+    @Size(min = 2, message = "Password > 5 chars")
     private String password;
+
     private String fullName;
     private String address;
     private String avatar;
+
     private String phoneNumber;
 
     @ManyToOne

@@ -309,12 +309,18 @@
 .fruite .fruite-item {
     height: 100%;
     transition: 0.5s;
+    display: flex;
+    flex-direction: column;
 }
 
 .fruite .fruite-item .p-4 {
     flex: 1;
     display: flex;
     flex-direction: column;
+}
+
+.fruite-item .p-4 .d-flex {
+    margin-top: auto;
 }
 
 .fruite .fruite-item:hover {

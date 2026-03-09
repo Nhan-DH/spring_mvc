@@ -8,6 +8,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "products")
@@ -15,12 +19,22 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NotNull
+    @NotEmpty(message = "NOT NULL")
     private String name;
+    @NotNull
+    @DecimalMin(value = "0", inclusive = false, message = "price > 0")
     private Double price;
     private String image;
+    @NotNull
+    @NotEmpty(message = "NOT NULL")
     private String detailDecs;
+    @NotNull
+    @NotEmpty(message = "NOT NULL")
     private String shortDesc;
     private long sold;
+    @NotNull
+    @Min(value = 1, message = "Quatity >= 1")
     private long quantity;
     private String factory;
     private String target;
