@@ -10,29 +10,10 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                 <meta name="description" content="" />
                 <meta name="author" content="" />
-                <title>Create User</title>
+                <title>Create product</title>
                 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
                 <link rel="stylesheet" href="/css/style.css">
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-                <script>
-                    $(document).ready(function () {
-                        const file = $('#avatarFile');
-                        const orgImage = "${newUser.avatar}"
-                        if (orgImage) {
-                            const url = "images/avatar" + orgImage;
-                            $("#avatarPreview").attr("src", url);
-                            $("#avatarPreview").css({ "display": "block" });
-                        }
-                        file.change(function (e) {
-                            const imgURL = URL.createObjectURL(e.target.files[0]);
-                            $("#avatarPreview").attr("src", imgURL);
-                            $("#avatarPreview").css({ "display": "block" });
-
-                        });
-                    });
-                </script>
-
             </head>
 
             <body class="sb-nav-fixed">
@@ -42,10 +23,10 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="ms-5">
-                                <h1>User Management</h1>
+                                <h1>product Management</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb>-item"><a href="/admin">Dashboard/</a></li>
-                                    <li class="breadcrumb-item active">User</li>
+                                    <li class="breadcrumb-item active">product</li>
                                 </ol>
                             </div>
                             <div class="container mt-5">
@@ -53,18 +34,21 @@
                                     <div class="row">
                                         <div class="col-12 mx-auto">
                                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h3>User Detail</h3>
-                                                <h1>Information for User ID: ${id}</h1>
+                                                <h3>product Detail</h3>
+                                                <h1>Information for product ID: ${id}</h1>
                                             </div>
                                             <hr />
                                             <div class="card" style=" width: 18rem;">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Full Name: ${user.fullName}</h5>
-                                                    <p class="card-text">Email: ${user.email}</p>
-                                                    <p class="card-text">Phone Number: ${user.phoneNumber}</p>
-                                                    <p class="card-text">Address: ${user.address}</p>
-                                                    <p class="card-text">Role: ${user.role.name}</p>
-                                                    <p class="card-text">Avatar: ${user.avatar}</p>
+                                                    <h5 class="card-title">Name: ${product.name}</h5>
+                                                    <p class="card-text">Price: ${product.price}</p>
+                                                    <p class="card-text"> DetailDecs: ${product.detailDecs}</p>
+                                                    <p class="card-text">ShortDesc: ${product.shortDesc}</p>
+                                                    <p class="card-text">Factory: ${product.factory}</p>
+                                                    <p class="card-text">Target: ${product.target}</p>
+                                                    <p class="card-text">Quantity: ${product.quantity}</p>
+                                                    <p class="card-text">Sold: ${product.sold}</p>
+
                                                     <div class="col-12 mb-3">
                                                         <img style="display:none; max-height: 200px;"
                                                             alt="avatar preview" id="avatarPreview">
@@ -73,7 +57,7 @@
 
                                             </div>
                                         </div>
-                                        <button onclick="window.location.href='/admin/user'" class="btn btn-primary"
+                                        <button onclick="window.location.href='/admin/product'" class="btn btn-primary"
                                             style="margin-top: 20px; width : 100px">Return</button>
                                     </div>
 

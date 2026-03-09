@@ -17,19 +17,22 @@
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
                 <script>
                     $(document).ready(function () {
-                        $('#productFile').change(function () {
-                            const file = this.files[0];
-                            if (file) {
-                                const reader = new FileReader();
-                                reader.onload = function (e) {
-                                    $('#productPreview').attr('src', e.target.result);
-                                    $('#productPreview').show();
-                                }
-                                reader.readAsDataURL(file);
-                            }
+                        const file = $('#productFile');
+                        const orgImage = "${newProduct.image}"
+                        if (orgImage) {
+                            const url = "images/product/" + orgImage;
+                            $("#productPreview").attr("src", url);
+                            $("#productPreview").css({ "display": "block" });
+                        }
+                        file.change(function (e) {
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            $("#productPreview").attr("src", imgURL);
+                            $("#productPreview").css({ "display": "block" });
+
                         });
                     });
                 </script>
+
             </head>
 
             <body class="sb-nav-fixed">
@@ -45,7 +48,7 @@
                                     <li class="breadcrumb-item active">Product</li>
                                 </ol>
                             </div>
-                            <form:form class=" mt-5" method="post" action="/admin/product/create"
+                            <form:form class=" mt-5" method="post" action="/admin/product/update/${id}"
                                 modelAttribute="newProduct" enctype="multipart/form-data">
                                 <h1 class="text-center text-primary">Product Registration</h1>
                                 <div class="col-md-6 col-12 mx-auto">
@@ -153,7 +156,7 @@
                                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                             <label class="form-check-label" for="exampleCheck1">Check me out</label>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-warning">Upadte</button>
                                     </div>
                             </form:form>
 

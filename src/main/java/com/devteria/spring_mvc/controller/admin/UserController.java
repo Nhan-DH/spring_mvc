@@ -74,11 +74,14 @@ public class UserController {
             return "admin/user/create";
         }
         //
+        if (!avatarFile.isEmpty()) {
+            String avatar = uploadService.handleUploadFile(avatarFile, "avatar");
+            hoidanit.setAvatar(avatar);// ghi de lai avatar sau khi da upload len server
+        }
 
-        String avatar = this.uploadService.handleUploadFile(avatarFile, "avatar");
         String hashPassword = this.passwordEncoder.encode(hoidanit.getPassword());
         System.out.println("form submitted" + hoidanit);
-        hoidanit.setAvatar(avatar); // ghi de lai avatar sau khi da upload len server
+
         hoidanit.setPassword(hashPassword); // ghi de lai password sau khi da hash
         hoidanit.setRole(this.userService.getRoleByName(hoidanit.getRole().getName()));
         this.userService.handleSaveUser(hoidanit);
@@ -108,7 +111,24 @@ public class UserController {
     }
 
     @PostMapping("admin/user/update/{id}")
-    public String postMethodName(Model model, @ModelAttribute("newUser") User newUser) {
+    public String postMethodName(Model model, @ModelAttribute("newUser") User newUser, @PathVariable long id,
+            BindingResult newUserBindingResult,
+            @RequestParam("avatarFile") MultipartFile avatarFile) {
+        // validate
+        List<FieldError> errors = newUserBindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(">>>>>>>>>>" + error.getField() + " - " + error.getDefaultMessage());
+        }
+
+        if (newUserBindingResult.hasErrors()) {
+            return "admin/user/create";
+        }
+        //
+
+        String avatar = this.uploadService.handleUploadFile(avatarFile, "avatar");
+        User currentUser = userService.getUserById(id);
+        newUser.setPassword(currentUser.getPassword());
+        newUser.setRole(this.userService.getRoleByName(newUser.getRole().getName()));
         this.userService.updatUser(newUser);
         return "redirect:/admin/user";
     }

@@ -29,7 +29,7 @@ public class UploadService {
             if (!dir.exists()) {
                 dir.mkdirs();
             }
-            finalName = dir.getAbsolutePath() + File.separator + file.getOriginalFilename();
+            finalName = file.getOriginalFilename();
             File serverFile = new File(finalName);
             BufferedOutputStream stream = new BufferedOutputStream(new java.io.FileOutputStream(serverFile));
             stream.write(bytes);

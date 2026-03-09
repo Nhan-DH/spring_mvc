@@ -8,4 +8,7 @@ import com.devteria.spring_mvc.domain.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
+    Product findById(long id);
+
+    Product deleteById(long id);
 }
