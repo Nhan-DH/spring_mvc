@@ -15,6 +15,8 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String name;
+    private String description;
 
     @OneToMany(mappedBy = "role")
     private List<User> users;
@@ -43,6 +45,4 @@ public class Role {
         this.description = description;
     }
 
-    private String name;
-    private String description;
 }

@@ -38,10 +38,10 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Full Name</th>
                                     <th>Email</th>
-                                    <th>Phone Number</th>
-                                    <th>Address</th>
+                                    <th>Full Name</th>
+                                    <th>Role</th>
+
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -49,10 +49,9 @@
                                 <c:forEach items="${users}" var="user">
                                     <tr>
                                         <td>${user.id}</td>
-                                        <td>${user.fullName}</td>
                                         <td>${user.email}</td>
-                                        <td>${user.phoneNumber}</td>
-                                        <td>${user.address}</td>
+                                        <td>${user.fullName}</td>
+                                        <td>${user.role.name}</td>
                                         <td>
                                             <a href="/admin/user/${user.id}" class = "btn btn-info">View</a>
                                             <a href="/admin/user/update/${user.id}" class = "btn btn-warning">Update</a>

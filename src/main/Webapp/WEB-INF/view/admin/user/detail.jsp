@@ -42,6 +42,11 @@
                     <p class = "card-text">Email: ${user.email}</p>
                     <p class = "card-text">Phone Number: ${user.phoneNumber}</p>
                     <p class = "card-text">Address: ${user.address}</p>
+                    <p class = "card-text">Role: ${user.role.name}</p>
+                    <p class = "card-text">Avatar: ${user.avatar}</p>
+                    <div class="col-12 mb-3">
+                    <img style = "display:none; max-height: 200px;" alt="avatar preview" id="avatarPreview">
+                              </div>
                 </div>
                 
               </div>

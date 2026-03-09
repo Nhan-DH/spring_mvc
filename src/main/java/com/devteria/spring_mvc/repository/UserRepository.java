@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.stereotype.Repository;
 
+import com.devteria.spring_mvc.domain.Role;
 import com.devteria.spring_mvc.domain.User;
 import com.devteria.spring_mvc.service.UserService;
 
@@ -20,4 +21,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findById(long id);
 
     User deleteById(long id);
+
 }

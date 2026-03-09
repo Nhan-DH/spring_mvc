@@ -20,8 +20,8 @@ public class User {
     private String fullName;
     private String address;
     private String avatar;
+    private String phoneNumber;
 
-    private String phone;
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
@@ -37,14 +37,6 @@ public class User {
         this.avatar = avatar;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public Role getRole() {
         return role;
     }
@@ -52,17 +44,6 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    private String phoneNumber;
-    private String image;
 
     // RoleId
     public long getId() {
@@ -126,6 +107,14 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
 }
