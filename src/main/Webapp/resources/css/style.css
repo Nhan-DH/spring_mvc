@@ -664,6 +664,7 @@ progress {
 .img-fluid {
     max-width: 100%;
     height: auto;
+
 }
 
 .img-thumbnail {
@@ -6774,6 +6775,7 @@ fieldset:disabled .btn {
     position: relative;
     width: 100%;
     overflow: hidden;
+
 }
 
 .carousel-inner::after {

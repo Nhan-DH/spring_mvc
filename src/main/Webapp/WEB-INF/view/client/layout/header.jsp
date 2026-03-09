@@ -4,25 +4,22 @@
             
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="index.html" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
+                     <svg width="32" height="32" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" rx="20" fill="#0A0A0A"/>
+                        <path d="M 20 20 h 30 a 30 30 0 0 1 30 30 a 30 30 0 0 1 -30 30 h -30 v -60 z 
+                                M 32 32 v 36 h 18 a 18 18 0 0 0 18 -18 a 18 18 0 0 0 -18 -18 h -18 z"
+                            fill="#FFFFFF"/>
+                        <circle cx="50" cy="50" r="8" fill="#0066FF"/>
+                    </svg>
+                    <a href="index.html" class="navbar-brand ms-3"><h1 class="text-primary display-6">NYAN</h1></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
-                            <a href="index.html" class="nav-item nav-link active">Home</a>
-                            <a href="shop.html" class="nav-item nav-link">Shop</a>
-                            <a href="shop-detail.html" class="nav-item nav-link">Shop Detail</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                    <a href="cart.html" class="dropdown-item">Cart</a>
-                                    <a href="chackout.html" class="dropdown-item">Chackout</a>
-                                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                    <a href="404.html" class="dropdown-item">404 Page</a>
-                                </div>
-                            </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <a href="#" class="nav-item nav-link active">Home</a>
+                            <a href="#" class="nav-item nav-link">Shop</a>
+                            <a href="#" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="d-flex m-3 me-0">
                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
