@@ -75,6 +75,14 @@
             <div class="container-fluid py-5 mt-5">
                 <div class="container py-5">
                     <div class="row g-4 mb-5">
+                        <div>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-4">
+                                    <li class="breadcrumb>-item"><a href="/">Home /</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page"> Product</li>
+                                </ol>
+                            </nav>
+                        </div>
                         <div class="col-lg-8 col-xl-9">
                             <div class="row g-4">
                                 <div class="col-lg-6">
@@ -128,6 +136,7 @@
                                                 aria-selected="false">Reviews</button> -->
                                         </div>
                                     </nav>
+                                    <!-- detail product start -->
                                     <div class="tab-content mb-5">
                                         <div class="tab-pane active" id="nav-about" role="tabpanel"
                                             aria-labelledby="nav-about-tab">
@@ -187,7 +196,9 @@
                                                 Clita erat ipsum et lorem et sit</p>
                                         </div>
                                     </div>
+                                    <!-- detail product end -->
                                 </div>
+                                <!-- comment start -->
                                 <form action="#">
                                     <h4 class="mb-5 fw-bold">Leave a Reply</h4>
                                     <div class="row g-4">
@@ -228,6 +239,7 @@
                                         </div>
                                     </div>
                                 </form>
+                                <!-- comment end -->
                             </div>
                         </div>
                         <div class="col-lg-4 col-xl-3">
@@ -275,142 +287,16 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="col-lg-12">
-                                    <h4 class="mb-4">Featured products</h4>
-                                    <div class="d-flex align-items-center justify-content-start">
-                                        <div class="rounded" style="width: 100px; height: 100px;">
-                                            <img src="img/featur-1.jpg" class="img-fluid rounded" alt="Image">
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-2">Big Banana</h6>
-                                            <div class="d-flex mb-2">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                            <div class="d-flex mb-2">
-                                                <h5 class="fw-bold me-2">2.99 $</h5>
-                                                <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-start">
-                                        <div class="rounded" style="width: 100px; height: 100px;">
-                                            <img src="img/featur-2.jpg" class="img-fluid rounded" alt="">
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-2">Big Banana</h6>
-                                            <div class="d-flex mb-2">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                            <div class="d-flex mb-2">
-                                                <h5 class="fw-bold me-2">2.99 $</h5>
-                                                <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-start">
-                                        <div class="rounded" style="width: 100px; height: 100px;">
-                                            <img src="img/featur-3.jpg" class="img-fluid rounded" alt="">
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-2">Big Banana</h6>
-                                            <div class="d-flex mb-2">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                            <div class="d-flex mb-2">
-                                                <h5 class="fw-bold me-2">2.99 $</h5>
-                                                <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-start">
-                                        <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                            <img src="img/vegetable-item-4.jpg" class="img-fluid rounded" alt="">
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-2">Big Banana</h6>
-                                            <div class="d-flex mb-2">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                            <div class="d-flex mb-2">
-                                                <h5 class="fw-bold me-2">2.99 $</h5>
-                                                <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-start">
-                                        <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                            <img src="img/vegetable-item-5.jpg" class="img-fluid rounded" alt="">
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-2">Big Banana</h6>
-                                            <div class="d-flex mb-2">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                            <div class="d-flex mb-2">
-                                                <h5 class="fw-bold me-2">2.99 $</h5>
-                                                <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-start">
-                                        <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                            <img src="img/vegetable-item-6.jpg" class="img-fluid rounded" alt="">
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-2">Big Banana</h6>
-                                            <div class="d-flex mb-2">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                            <div class="d-flex mb-2">
-                                                <h5 class="fw-bold me-2">2.99 $</h5>
-                                                <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-center my-4">
-                                        <a href="#"
-                                            class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Vew
-                                            More</a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="position-relative">
-                                        <img src="img/banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
-                                        <div class="position-absolute"
-                                            style="top: 50%; right: 10px; transform: translateY(-50%);">
-                                            <h3 class="text-secondary fw-bold">Fresh <br> Fruits <br> Banner</h3>
-                                        </div>
-                                    </div>
-                                </div>
+
+
                             </div>
                         </div>
                     </div>
+
+                    <!-- Related products start -->
                     <h1 class="fw-bold mb-0">Related products</h1>
-                    <div class="vesitable">
+                    <h1>developing....</h1>
+                    <!-- <div class="vesitable">
                         <div class="owl-carousel vegetable-carousel justify-content-center">
                             <div class="border border-primary rounded position-relative vesitable-item">
                                 <div class="vesitable-img">
@@ -558,7 +444,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+                    <!-- Related products end -->
                 </div>
             </div>
             <!-- Single Product End -->

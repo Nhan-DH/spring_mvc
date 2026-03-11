@@ -6,7 +6,7 @@
 
                 <div class="col-lg-3">
                     <a href="#">
-                        <h1 class="text-primary mb-0">LaptopShop</h1>
+                        <h1 class="text-primary mb-0">NyanShop</h1>
                         <p class="text-secondary mb-0">Best Laptop Store</p>
                     </a>
                 </div>
@@ -44,9 +44,9 @@
 
             <div class="col-lg-3 col-md-6">
                 <div class="footer-item">
-                    <h4 class="text-light mb-3">Why Choose LaptopShop?</h4>
+                    <h4 class="text-light mb-3">Why Choose NyanShop?</h4>
                     <p class="mb-4">
-                        LaptopShop provides high quality laptops from trusted brands like Apple, Lenovo, Dell, and Asus.
+                        NyanShop provides high quality laptops from trusted brands like Apple, Lenovo, Dell, and Asus.
                         We offer competitive prices, genuine products, and professional customer support.
                     </p>
 
