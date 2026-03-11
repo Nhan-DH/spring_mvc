@@ -4,60 +4,46 @@
             <div class="row g-4">
                 <div class="col-lg-12">
                     <div class="row g-4">
-                        <div class="col-md-6 col-lg-4 col-xl-3">
-                            <div class="rounded position-relative fruite-item">
-                                <div class="fruite-img">
-                                    <img src="/client/img/Air-m2.jpg" class="img-fluid w-100 rounded-top"
-                                        alt="MacBook Air M2">
-                                </div>
+                        <c:forEach var="product" items="${products}">
+                            <div class=" col-md-6 col-lg-4 col-xl-3">
+                                <div class="rounded position-relative fruite-item">
 
-                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                    style="top: 10px; left: 10px;">MacBook</div>
-
-                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                    <h4>MacBook Air M2</h4>
-
-                                    <p>Apple M2 chip, 8GB RAM, 256GB SSD, 13.6-inch Liquid Retina display.</p>
-
-                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                        <p class="text-dark fs-5 fw-bold mb-0">$1099</p>
-
-                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
-                                            <i class="fa fa-shopping-bag me-2 text-primary"></i>
-                                            Add to cart
-                                        </a>
+                                    <div class="fruite-img">
+                                        <img src="/images/image/${product.image}" class="img-fluid w-100 rounded-top">
                                     </div>
+
+                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                        style="top: 10px; left: 10px;">
+                                        ${product.factory}
+                                    </div>
+
+                                    <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                        <a href="/client/product/${product.id}">
+                                            <h4>${product.name}</h4>
+                                        </a>
+
+
+                                        <p>${product.shortDesc}</p>
+
+                                        <div class="d-flex justify-content-between flex-lg-wrap">
+
+                                            <p class="text-dark fs-5 fw-bold mb-0">
+                                                ${product.price}
+                                            </p>
+
+                                            <a href="/product/${product.id}"
+                                                class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                <i class="fa fa-shopping-bag me-2 text-primary"></i>
+                                                Add to cart
+                                            </a>
+
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
+                        </c:forEach>
 
-                        <div class="col-md-6 col-lg-4 col-xl-3">
-                            <div class="rounded position-relative fruite-item">
-                                <div class="fruite-img">
-                                    <img src="/client/img/air-m3.png" class="img-fluid w-100 rounded-top" alt="">
-                                </div>
-
-                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                    style="top:10px; left:10px;">
-                                    MacBook
-                                </div>
-
-                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                    <h4>MacBook Air M3</h4>
-
-                                    <p>Apple M3, 8GB RAM, 256GB SSD, 13.6" Liquid Retina</p>
-
-                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                        <p class="text-dark fs-5 fw-bold mb-0">$1299</p>
-
-                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
-                                            <i class="fa fa-shopping-bag me-2 text-primary"></i>
-                                            Add to cart
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

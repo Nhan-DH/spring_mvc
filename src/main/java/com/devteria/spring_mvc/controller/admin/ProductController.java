@@ -98,6 +98,7 @@ public class ProductController {
     public String getProduct(Model model, @PathVariable long id) {
         model.addAttribute("id", id);
         model.addAttribute("product", this.productService.getProductById(id));
+
         return "admin/product/detail";
     }
 

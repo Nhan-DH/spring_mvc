@@ -45,7 +45,8 @@
                                 <h1>User Management</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb>-item"><a href="/admin">Dashboard/</a></li>
-                                    <li class="breadcrumb-item active">User</li>
+                                    <li class="breadcrumb>-item"><a href="/admin/user">Product/</a></li>
+                                    <li class="breadcrumb-item active">Detail</li>
                                 </ol>
                             </div>
                             <div class="container mt-5">
@@ -57,18 +58,19 @@
                                                 <h1>Information for User ID: ${id}</h1>
                                             </div>
                                             <hr />
-                                            <div class="card" style=" width: 18rem;">
+                                            <div class="card" style=" width: 26rem;">
                                                 <div class="card-body">
+                                                    <div class="col-12 mb-3">
+                                                        <img src="/images/image/${user.avatar}"
+                                                            style="max-height:200px;">
+                                                    </div>
                                                     <h5 class="card-title">Full Name: ${user.fullName}</h5>
                                                     <p class="card-text">Email: ${user.email}</p>
                                                     <p class="card-text">Phone Number: ${user.phoneNumber}</p>
                                                     <p class="card-text">Address: ${user.address}</p>
                                                     <p class="card-text">Role: ${user.role.name}</p>
-                                                    <p class="card-text">Avatar: ${user.avatar}</p>
-                                                    <div class="col-12 mb-3">
-                                                        <img style="display:none; max-height: 200px;"
-                                                            alt="avatar preview" id="avatarPreview">
-                                                    </div>
+
+
                                                 </div>
 
                                             </div>

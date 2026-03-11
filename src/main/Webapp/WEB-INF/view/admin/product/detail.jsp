@@ -14,6 +14,7 @@
                 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
                 <link rel="stylesheet" href="/css/style.css">
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
             </head>
 
             <body class="sb-nav-fixed">
@@ -23,10 +24,11 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="ms-5">
-                                <h1>product Management</h1>
+                                <h1>Product Management</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb>-item"><a href="/admin">Dashboard/</a></li>
-                                    <li class="breadcrumb-item active">product</li>
+                                    <li class="breadcrumb>-item"><a href="/admin/product">Product/</a></li>
+                                    <li class="breadcrumb-item active">Detail</li>
                                 </ol>
                             </div>
                             <div class="container mt-5">
@@ -34,12 +36,17 @@
                                     <div class="row">
                                         <div class="col-12 mx-auto">
                                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h3>product Detail</h3>
+                                                <h3>Product Detail</h3>
                                                 <h1>Information for product ID: ${id}</h1>
                                             </div>
                                             <hr />
-                                            <div class="card" style=" width: 18rem;">
+                                            <div class="card" style=" width: 26rem;">
                                                 <div class="card-body">
+                                                    <div class="col-12 mb-3">
+                                                        <img src="/images/image/${product.image}"
+                                                            style="max-height:200px;" alt="image preview"
+                                                            id="productPreview">
+                                                    </div>
                                                     <h5 class="card-title">Name: ${product.name}</h5>
                                                     <p class="card-text">Price: ${product.price}</p>
                                                     <p class="card-text"> DetailDecs: ${product.detailDecs}</p>

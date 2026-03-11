@@ -44,7 +44,8 @@
                 <h1>User Management</h1>
                 <ol class="breadcrumb mb-4">
                   <li class="breadcrumb>-item"><a href="/admin">Dashboard/</a></li>
-                  <li class="breadcrumb-item active">User</li>
+                  <li class="breadcrumb>-item"><a href="/admin/user">Product/</a></li>
+                  <li class="breadcrumb-item active">Update</li>
                 </ol>
               </div>
               <form:form class="container mt-5" method="post" action="/admin/user/update/${id}" modelAttribute="newUser"

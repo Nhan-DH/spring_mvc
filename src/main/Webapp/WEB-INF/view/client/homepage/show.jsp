@@ -74,9 +74,7 @@
             <!-- banner layout -->
             <jsp:include page="/WEB-INF/view/client/layout/banner.jsp" />
 
-            <!-- Featurs Section Start -->
-            <jsp:include page="/WEB-INF/view/client/layout/feature.jsp" />
-            <!-- Featurs Section End -->
+
 
 
             <!--  Shop Start-->
@@ -107,7 +105,9 @@
             </div>
             <!--  Shop End-->
 
-
+            <!-- Featurs Section Start -->
+            <jsp:include page="/WEB-INF/view/client/layout/feature.jsp" />
+            <!-- Featurs Section End -->
 
             <!-- Footer Start -->
             <jsp:include page="/WEB-INF/view/client/layout/footer.jsp" />

@@ -43,7 +43,8 @@
                                 <h1>User Management</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb>-item"><a href="/admin">Dashboard/</a></li>
-                                    <li class="breadcrumb-item active">User</li>
+                                    <li class="breadcrumb>-item"><a href="/admin/user">Product/</a></li>
+                                    <li class="breadcrumb-item active">Create</li>
                                 </ol>
                             </div>
                             <form:form class=" mt-5" method="post" action="/admin/user/create" modelAttribute="newUser"
