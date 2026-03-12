@@ -63,7 +63,7 @@
 
                                 <div class="card-body px-5 pb-5">
 
-                                    <form action="/register" method="post">
+                                    <form:form action="/register" method="post" modelAttribute="registerUser">
 
                                         <div class="row mb-3">
 
@@ -76,8 +76,8 @@
                                                         <i class="fas fa-user"></i>
                                                     </span>
 
-                                                    <input type="text" name="firstName" class="form-control"
-                                                        placeholder="First name" required>
+                                                    <form:input type="text" path="firstName" class="form-control"
+                                                        placeholder="First name" />
 
                                                 </div>
 
@@ -92,8 +92,8 @@
                                                         <i class="fas fa-user"></i>
                                                     </span>
 
-                                                    <input type="text" name="lastName" class="form-control"
-                                                        placeholder="Last name" required>
+                                                    <form:input type="text" path="lastName" class="form-control"
+                                                        placeholder="Last name" required="true" />
 
                                                 </div>
 
@@ -111,8 +111,8 @@
                                                     <i class="fas fa-envelope"></i>
                                                 </span>
 
-                                                <input type="email" name="email" class="form-control"
-                                                    placeholder="Enter your email" required>
+                                                <form:input type="email" path="email" class="form-control"
+                                                    placeholder="Enter your email" required="true" />
 
                                             </div>
 
@@ -130,8 +130,8 @@
                                                         <i class="fas fa-lock"></i>
                                                     </span>
 
-                                                    <input type="password" name="password" class="form-control"
-                                                        placeholder="Create password" required>
+                                                    <form:input type="password" path="password" class="form-control"
+                                                        placeholder="Create password" required="true" />
 
                                                 </div>
 
@@ -147,8 +147,9 @@
                                                         <i class="fas fa-lock"></i>
                                                     </span>
 
-                                                    <input type="password" name="confirmPassword" class="form-control"
-                                                        placeholder="Confirm password" required>
+                                                    <form:input type="password" path="confirmPassword"
+                                                        class="form-control" placeholder="Confirm password"
+                                                        required="true" />
 
                                                 </div>
 
@@ -164,7 +165,7 @@
 
                                         </div>
 
-                                    </form>
+                                    </form:form>
 
                                 </div>
 
