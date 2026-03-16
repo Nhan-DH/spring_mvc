@@ -64,7 +64,11 @@
                                 <div class="card-body px-5 pb-5">
 
                                     <form action="/login" method="post">
-
+                                        <c:if test="${param.error != null}">
+                                            <div class="alert alert-danger">
+                                                Login failed! Email or password is incorrect.
+                                            </div>
+                                        </c:if>
                                         <div class="mb-3">
 
                                             <label class="form-label">Email</label>
@@ -75,7 +79,7 @@
                                                     <i class="fas fa-envelope"></i>
                                                 </span>
 
-                                                <input type="email" name="email" class="form-control"
+                                                <input type="email" name="username" class="form-control"
                                                     placeholder="Enter your email" required>
 
                                             </div>
@@ -95,6 +99,10 @@
                                                 <input type="password" name="password" class="form-control"
                                                     placeholder="Enter password" required>
 
+                                            </div>
+                                            <div>
+                                                <input type="hidden" name="${_csrf.parameterName}"
+                                                    value="${_csrf.token}" />
                                             </div>
 
                                         </div>
