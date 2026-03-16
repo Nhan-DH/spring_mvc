@@ -64,7 +64,15 @@
                                 <div class="card-body px-5 pb-5">
 
                                     <form:form action="/register" method="post" modelAttribute="registerUser">
-
+                                        <c:set var="errorPassword">
+                                            <form:errors path="password" cssClass="invalid-feedback" />
+                                        </c:set>
+                                        <c:set var="errorConfirmPassword">
+                                            <form:errors path="confirmPassword" cssClass="invalid-feedback" />
+                                        </c:set>
+                                        <c:set var="errorEmail">
+                                            <form:errors path="email" cssClass="invalid-feedback" />
+                                        </c:set>
                                         <div class="row mb-3">
 
                                             <div class="col-md-6">
@@ -111,9 +119,10 @@
                                                     <i class="fas fa-envelope"></i>
                                                 </span>
 
-                                                <form:input type="email" path="email" class="form-control"
+                                                <form:input type="email" path="email"
+                                                    class="form-control ${not empty errorEmail ? 'is-invalid' : ''}"
                                                     placeholder="Enter your email" required="true" />
-
+                                                ${errorEmail}
                                             </div>
 
                                         </div>
@@ -130,9 +139,10 @@
                                                         <i class="fas fa-lock"></i>
                                                     </span>
 
-                                                    <form:input type="password" path="password" class="form-control"
+                                                    <form:input type="password" path="password"
+                                                        class="form-control ${not empty errorPassword ? 'is-invalid' : ''}"
                                                         placeholder="Create password" required="true" />
-
+                                                    ${errorPassword}
                                                 </div>
 
                                             </div>
@@ -148,9 +158,9 @@
                                                     </span>
 
                                                     <form:input type="password" path="confirmPassword"
-                                                        class="form-control" placeholder="Confirm password"
-                                                        required="true" />
-
+                                                        class="form-control ${not empty errorConfirmPassword ? 'is-invalid' : ''}"
+                                                        placeholder="Confirm password" required="true" />
+                                                    ${errorConfirmPassword}
                                                 </div>
 
                                             </div>

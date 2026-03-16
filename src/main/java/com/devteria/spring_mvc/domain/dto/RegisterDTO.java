@@ -1,6 +1,7 @@
 package com.devteria.spring_mvc.domain.dto;
 
 import com.devteria.spring_mvc.service.validator.RegisterChecked;
+import com.devteria.spring_mvc.service.validator.StrongPassword;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
@@ -10,9 +11,10 @@ public class RegisterDTO {
     @Size(min = 3, message = "The first name must have at least 3 characters")
     private String firstName;
     private String lastName;
-    @Email(message = "Invalid email", regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&]).{8,}$")
+    @Email(message = "Invalid email", regexp = "^[A-Za-z0-9+_.-]+@gmail\\.com$")
     private String email;
     @Size(min = 3, message = "The password must have at least 3 characters")
+    @StrongPassword
     private String password;
     private String confirmPassword;
 
