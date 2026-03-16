@@ -52,4 +52,12 @@ public class UserService {
         return user;
     }
 
+    public boolean checkEmailExist(String email) {
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Checking email in DB: " + email);
+        return this.userRepository.existsByEmail(email);
+    }
+
+    public User getUserByEmail(String email) {
+        return this.userRepository.findByEmail(email);
+    }
 }
