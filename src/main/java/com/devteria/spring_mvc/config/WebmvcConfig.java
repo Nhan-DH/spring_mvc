@@ -24,10 +24,10 @@ public class WebmvcConfig implements WebMvcConfigurer {
         return bean;
     }
 
-    @Bean
-    public AuthenticationSuccessHandler customSuccessHandler() {
-        return new CustomSuccessHandler();
-    }
+    // @Bean
+    // public AuthenticationSuccessHandler customSuccessHandler() {
+    // return new CustomSuccessHandler();
+    // }
 
     @Override
     public void configureViewResolvers(@NonNull ViewResolverRegistry registry) {

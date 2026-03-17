@@ -54,9 +54,9 @@ public class SecurityConfig {
         return http.build();
     }
 
-    private AuthenticationSuccessHandler customSuccessHandler() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'customSuccessHandler'");
+    @Bean
+    public AuthenticationSuccessHandler customSuccessHandler() {
+        return new CustomSuccessHandler();
     }
 
     @Bean
