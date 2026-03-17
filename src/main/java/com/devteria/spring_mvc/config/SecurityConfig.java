@@ -27,11 +27,11 @@ import jakarta.servlet.DispatcherType;
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
-    private final AuthenticationSuccessHandler customSuccessHandler;
+    // private final AuthenticationSuccessHandler customSuccessHandler;
 
-    SecurityConfig(AuthenticationSuccessHandler customSuccessHandler) {
-        this.customSuccessHandler = customSuccessHandler;
-    }
+    // SecurityConfig(AuthenticationSuccessHandler customSuccessHandler) {
+    // this.customSuccessHandler = customSuccessHandler;
+    // }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
