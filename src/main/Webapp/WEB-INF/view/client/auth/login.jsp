@@ -69,6 +69,11 @@
                                                 Login failed! Email or password is incorrect.
                                             </div>
                                         </c:if>
+                                        <c:if test="${param.logout != null}">
+                                            <div class="alert alert-success">
+                                                Logout success
+                                            </div>
+                                        </c:if>
                                         <div class="mb-3">
 
                                             <label class="form-label">Email</label>

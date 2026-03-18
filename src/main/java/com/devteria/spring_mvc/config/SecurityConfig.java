@@ -48,6 +48,8 @@ public class SecurityConfig {
                         .failureUrl("/login?error")
                         .successHandler(customSuccessHandler())
                         .permitAll())
+
+                .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"))
                 .csrf((csrf) -> csrf
                         .csrfTokenRepository(new HttpSessionCsrfTokenRepository()));
 

@@ -17,6 +17,7 @@ import com.devteria.spring_mvc.service.ProductService;
 import com.devteria.spring_mvc.service.UserService;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomePageController {
@@ -63,6 +64,11 @@ public class HomePageController {
     @GetMapping("/login")
     public String getLoginPage() {
         return "client/auth/login";
+    }
+
+    @GetMapping("/access-deny")
+    public String getDenyPage(Model model) {
+        return "client/auth/deny";
     }
 
 }
