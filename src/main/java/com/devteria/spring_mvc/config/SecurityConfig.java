@@ -10,12 +10,17 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.RememberMeServices;
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices.RememberMeTokenAlgorithm;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 
 import com.devteria.spring_mvc.service.CustomUserDetailsService;
 import com.devteria.spring_mvc.service.UserService;
@@ -43,6 +48,8 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
+
+                .rememberMe(remember -> remember.rememberMeServices(rememberMeServices()))
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .failureUrl("/login?error")
@@ -59,6 +66,16 @@ public class SecurityConfig {
     @Bean
     public AuthenticationSuccessHandler customSuccessHandler() {
         return new CustomSuccessHandler();
+    }
+
+    @Bean
+    SpringSessionRememberMeServices rememberMeServices() {
+
+        SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
+        // optionally customize
+        rememberMeServices.setAlwaysRemember(true);
+        rememberMeServices.setAlwaysRemember(true);
+        return rememberMeServices;
     }
 
     @Bean
