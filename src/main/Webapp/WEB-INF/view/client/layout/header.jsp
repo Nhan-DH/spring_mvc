@@ -45,7 +45,7 @@ d-flex align-items-center justify-content-center text-white px-1"
                                         <!-- Avatar + tên -->
                                         <li class="d-flex align-items-center flex-column" style="min-width: 300px;">
                                             <img style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden;"
-                                                src="/images/avatar/${session.avatar}" />
+                                                src="/images/avatar/${sessionScope.avatar}" />
 
                                             <div class="text-center my-3">
                                                 <c:out value="${sessionScope.fullName}" />
