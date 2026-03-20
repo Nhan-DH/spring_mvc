@@ -41,8 +41,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     List<Order> orders;
 
-    @OneToOne
-    @JoinColumn(name = "cart_id")
+    @OneToMany(mappedBy = "user")
     private Cart cart;
 
     public String getAvatar() {
