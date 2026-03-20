@@ -1,5 +1,7 @@
 package com.devteria.spring_mvc.controller.client;
 
+import java.util.List;
+
 import org.hibernate.annotations.GeneratorType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.devteria.spring_mvc.domain.Cart;
+import com.devteria.spring_mvc.domain.CartDetail;
 import com.devteria.spring_mvc.domain.Product;
+import com.devteria.spring_mvc.domain.User;
 import com.devteria.spring_mvc.service.ProductService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -43,7 +48,19 @@ public class ItemController {
     }
 
     @GetMapping("/cart")
-    public String getCart() {
+    public String getCart(Model model, HttpServletRequest request) {
+        User curUser = new User();
+        HttpSession session = request.getSession(false);
+        long id = (long) session.getAttribute("id");
+        curUser.setId(id);
+        Cart cart = this.productService.getCartByUser(curUser);
+        List<CartDetail> cartDetails = cart.getCartDetail();
+        double total = 0;
+        for (CartDetail cd : cartDetails) {
+            total += cd.getPrice() * cd.getQuantity();
+        }
+        model.addAttribute("cartDetails", cartDetails);
+        model.addAttribute("total", total);
         return "client/cart/show";
     }
 

@@ -61,6 +61,7 @@ public class ProductService {
     }
 
     public void handleAddProductToCart(String email, long id, HttpSession session) {
+
         User user = this.userRepository.findByEmail(email);
         // if user haven't a cart , create new cart
         if (user != null) {
@@ -98,5 +99,9 @@ public class ProductService {
 
         }
 
+    }
+
+    public Cart getCartByUser(User user) {
+        return this.cartRepository.findByUser(user);
     }
 }
