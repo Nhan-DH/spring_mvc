@@ -30,7 +30,7 @@
                                     <span class="position-absolute rounded-circle 
 d-flex align-items-center justify-content-center text-white px-1"
                                         style="top:-5px; left:15px; height:20px; min-width:20px; background:#0066ff;">
-                                        3
+                                        ${sessionScope.sum}
                                     </span>
                                 </a>
                                 <div class="dropdown my-auto">
