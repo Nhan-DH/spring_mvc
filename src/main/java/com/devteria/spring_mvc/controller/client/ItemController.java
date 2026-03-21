@@ -1,5 +1,6 @@
 package com.devteria.spring_mvc.controller.client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.GeneratorType;
@@ -54,7 +55,7 @@ public class ItemController {
         long id = (long) session.getAttribute("id");
         curUser.setId(id);
         Cart cart = this.productService.getCartByUser(curUser);
-        List<CartDetail> cartDetails = cart.getCartDetail();
+        List<CartDetail> cartDetails = cart == null ? new ArrayList<CartDetail>() : cart.getCartDetail();
         double total = 0;
         for (CartDetail cd : cartDetails) {
             total += cd.getPrice() * cd.getQuantity();
