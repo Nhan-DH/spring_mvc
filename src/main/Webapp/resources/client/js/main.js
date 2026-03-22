@@ -133,18 +133,40 @@
 
     // Product Quantity
     $('.quantity button').on('click', function () {
+        let change = 0;
         var button = $(this);
         var oldValue = button.parent().parent().find('input').val();
         if (button.hasClass('btn-plus')) {
             var newVal = parseFloat(oldValue) + 1;
+            change = 1;
         } else {
-            if (oldValue > 0) {
+            if (oldValue > 1) {
                 var newVal = parseFloat(oldValue) - 1;
+                change = -1;
             } else {
-                newVal = 0;
+                newVal = 1;
             }
         }
-        button.parent().parent().find('input').val(newVal);
+        const input = button.parent().parent().find('input');
+        input.val(newVal);
+        const price = input.data('cart-detail-price');
+        const cartDetailId = input.data('cart-detail-id');
+        const newPriceElement = $(`p[data-cart-detail-id="${cartDetailId}"]`);
+        if (newPriceElement) {
+            const newPrice = +price * newVal;
+            newPriceElement.text(newPrice.toFixed(2) + '$');
+        }
+        //update total price
+        const totalPriceElement = $(`p[data-cart-total-price]`);
+        if (totalPriceElement && totalPriceElement.length) {
+            const currentTotalPrice = totalPriceElement.first().attr("data-cart-total-price");
+            let newTotal = +currentTotalPrice + change * price;
+            change = 0;
+            totalPriceElement.each(function () {
+                $(this).attr("data-cart-total-price", newTotal);
+                $(this).text(newTotal.toFixed(2) + '$');
+            });
+        }
     });
 
 })(jQuery);
