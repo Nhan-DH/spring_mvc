@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.GeneratorType;
+import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,6 +64,15 @@ public class ItemController {
         model.addAttribute("cartDetails", cartDetails);
         model.addAttribute("total", total);
         return "client/cart/show";
+    }
+
+    @PostMapping("/delete-cart-detail/{id}")
+    public String deleteCartDetail(@PathVariable Long id, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        long cartDetailId = id;
+        this.productService.handleRemoveCartDetail(cartDetailId, session);
+
+        return "redirect:/cart";
     }
 
 }
