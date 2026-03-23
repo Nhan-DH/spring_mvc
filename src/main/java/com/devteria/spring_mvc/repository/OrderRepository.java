@@ -8,5 +8,7 @@ import com.devteria.spring_mvc.domain.Product;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
+    Order findById(long id);
 
+    void deleteById(long id);
 }

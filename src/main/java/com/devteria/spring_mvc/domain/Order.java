@@ -22,6 +22,13 @@ public class Order {
     private String receiverAddress;
     private String receiverNote;
     private String status;
+    private double totalPrice;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderDetail> orderDetails;
 
     public long getId() {
         return id;
@@ -95,11 +102,4 @@ public class Order {
         this.orderDetails = orderDetails;
     }
 
-    private double totalPrice;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @OneToMany(mappedBy = "order")
-    private List<OrderDetail> orderDetails;
 }
