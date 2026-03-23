@@ -122,4 +122,14 @@ public class ItemController {
         return "client/cart/thanks";
     }
 
+    @PostMapping("/add-product-from-view-detail")
+    public String postMethodName(@RequestParam("id") long id,
+            @RequestParam("quantity") int quantity,
+            HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        String email = (String) session.getAttribute("email");
+        this.productService.handleAddProductToCartFromViewDetail(email, id, session, quantity);
+        return "redirect:/client/product/" + id;
+    }
+
 }

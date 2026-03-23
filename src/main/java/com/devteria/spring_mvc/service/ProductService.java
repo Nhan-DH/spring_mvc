@@ -190,4 +190,43 @@ public class ProductService {
         }
 
     }
+
+    public void handleAddProductToCartFromViewDetail(String email, long id, HttpSession session, int quantity) {
+        User user = this.userRepository.findByEmail(email);
+        // if user haven't a cart , create new cart
+        if (user != null) {
+            Cart cart = this.cartRepository.findByUser(user);
+            if (cart == null) {
+                Cart newCart = new Cart();
+                newCart.setUser(user);
+                newCart.setSum(0);
+                cart = this.cartRepository.save(newCart);
+            }
+
+            // find product by id
+            // save cart detail
+            Product product = this.productRepository.findById(id);
+
+            // check san pham da tung duoc them vao gio hang truoc day hay chua
+            CartDetail oldDetail = this.cartDetailRepository.findByCartAndProduct(cart, product);
+            if (oldDetail == null) {
+                CartDetail cartDetail = new CartDetail();
+                cartDetail.setCart(cart);
+                cartDetail.setProduct(product);
+                cartDetail.setPrice(product.getPrice());
+                cartDetail.setQuantity(quantity);
+                this.cartDetailRepository.save(cartDetail);
+                // update cart(sum)
+                int s = cart.getSum() + 1;
+                cart.setSum(s);
+                this.cartRepository.save(cart);
+                session.setAttribute("sum", s);
+
+            } else {
+                oldDetail.setQuantity(oldDetail.getQuantity() + quantity);
+                this.cartDetailRepository.save(oldDetail);
+            }
+
+        }
+    }
 }

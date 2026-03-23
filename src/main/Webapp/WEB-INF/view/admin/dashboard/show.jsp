@@ -149,9 +149,12 @@
                                         <div class="stat-card-body">
                                             <div>
                                                 <div class="stat-card-label">Total Users</div>
-                                                <div class="stat-card-value text-primary">1,248</div>
-                                                <div class="stat-card-footer"><i
-                                                        class="fas fa-arrow-up text-success"></i> +12% from last month
+                                                <div class="stat-card-value text-primary">${countUser}</div>
+                                                <div class="stat-card-footer">
+                                                    <i class="fas fa-eye text-primary"></i>
+                                                    <a href="/admin/user" class="ms-2 text-decoration-none">
+                                                        View Detail
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="stat-card-icon" style="background: #D0E8F2;">
@@ -165,9 +168,12 @@
                                         <div class="stat-card-body">
                                             <div>
                                                 <div class="stat-card-label">Total Products</div>
-                                                <div class="stat-card-value text-success">856</div>
-                                                <div class="stat-card-footer"><i
-                                                        class="fas fa-arrow-up text-success"></i> +8% from last month
+                                                <div class="stat-card-value text-success">${countProduct}</div>
+                                                <div class="stat-card-footer">
+                                                    <i class="fas fa-eye text-primary"></i>
+                                                    <a href="/admin/product" class="ms-2 text-decoration-none">
+                                                        View Detail
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="stat-card-icon" style="background: #D0E8F2;">
@@ -181,9 +187,12 @@
                                         <div class="stat-card-body">
                                             <div>
                                                 <div class="stat-card-label">Total Orders</div>
-                                                <div class="stat-card-value text-info">432</div>
-                                                <div class="stat-card-footer"><i
-                                                        class="fas fa-arrow-up text-success"></i> +15% from last month
+                                                <div class="stat-card-value text-info">${countOrder}</div>
+                                                <div class="stat-card-footer">
+                                                    <i class="fas fa-eye text-primary"></i>
+                                                    <a href="/admin/order" class="ms-2 text-decoration-none">
+                                                        View Detail
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="stat-card-icon" style="background: #D0E8F2;">

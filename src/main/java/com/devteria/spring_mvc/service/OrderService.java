@@ -42,4 +42,8 @@ public class OrderService {
         }
         this.orderRepository.deleteById(id);
     }
+
+    public List<Order> getOrdersByUserId(long userId) {
+        return this.orderRepository.findByUserId(userId);
+    }
 }

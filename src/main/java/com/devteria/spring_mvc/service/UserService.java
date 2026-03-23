@@ -7,17 +7,24 @@ import org.springframework.stereotype.Service;
 import com.devteria.spring_mvc.domain.Role;
 import com.devteria.spring_mvc.domain.User;
 import com.devteria.spring_mvc.domain.dto.RegisterDTO;
+import com.devteria.spring_mvc.repository.OrderRepository;
+import com.devteria.spring_mvc.repository.ProductRepository;
 import com.devteria.spring_mvc.repository.RoleRepository;
 import com.devteria.spring_mvc.repository.UserRepository;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final ProductRepository productRepository;
+    private final OrderRepository orderRepository;
     private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository,
+            ProductRepository productRepository, OrderRepository orderRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.productRepository = productRepository;
+        this.orderRepository = orderRepository;
     }
 
     public User handleSaveUser(User user) {
@@ -59,5 +66,18 @@ public class UserService {
 
     public User getUserByEmail(String email) {
         return this.userRepository.findByEmail(email);
+    }
+
+    public long countUsers() {
+        return this.userRepository.count();
+    }
+
+    public long countProducts() {
+        return this.productRepository.count();
+
+    }
+
+    public long countOrders() {
+        return this.orderRepository.count();
     }
 }

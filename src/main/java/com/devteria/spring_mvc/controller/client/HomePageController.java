@@ -2,6 +2,7 @@ package com.devteria.spring_mvc.controller.client;
 
 import java.util.List;
 
+import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,12 +11,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.devteria.spring_mvc.domain.Order;
 import com.devteria.spring_mvc.domain.Product;
 import com.devteria.spring_mvc.domain.User;
 import com.devteria.spring_mvc.domain.dto.RegisterDTO;
+import com.devteria.spring_mvc.service.OrderService;
 import com.devteria.spring_mvc.service.ProductService;
 import com.devteria.spring_mvc.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,11 +29,14 @@ public class HomePageController {
     private final ProductService productService;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final OrderService orderService;
 
-    public HomePageController(ProductService productService, UserService userService, PasswordEncoder passwordEncoder) {
+    public HomePageController(ProductService productService, UserService userService, PasswordEncoder passwordEncoder,
+            OrderService orderService) {
         this.productService = productService;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.orderService = orderService;
     }
 
     @GetMapping("/")
@@ -69,6 +77,19 @@ public class HomePageController {
     @GetMapping("/access-deny")
     public String getDenyPage(Model model) {
         return "client/auth/deny";
+    }
+
+    @GetMapping("/client/my-orders")
+    public String getMyOrderPage(Model model, HttpServletRequest request) {
+        User curUser = new User();
+        HttpSession session = request.getSession();
+        long id = (long) session.getAttribute("id");
+        curUser = this.userService.getUserById(id);
+
+        List<Order> orders = this.orderService.getOrdersByUserId(curUser.getId());
+
+        model.addAttribute("orders", orders);
+        return "client/cart/my-orders";
     }
 
 }
