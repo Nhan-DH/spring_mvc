@@ -17,6 +17,12 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String receiverName;
+    private String receiverPhone;
+    private String receiverAddress;
+    private String receiverNote;
+    private String status;
+
     private double totalPrice;
     @ManyToOne
     @JoinColumn(name = "user_id")
