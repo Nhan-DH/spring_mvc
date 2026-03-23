@@ -139,6 +139,7 @@ public class UserController {
     @GetMapping("admin/user/delete/{id}")
     public String deleteUser(Model model, @PathVariable long id) {
         model.addAttribute("id", id);
+        model.addAttribute("user", this.userService.getUserById(id));
         return "admin/user/delete";
     }
 

@@ -8,31 +8,128 @@
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <meta name="description" content="" />
+                <meta name="description" content="User Detail" />
                 <meta name="author" content="" />
-                <title>Create User</title>
+                <title>User Detail - Admin</title>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
                 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
                 <link rel="stylesheet" href="/css/style.css">
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-                <script>
-                    $(document).ready(function () {
-                        const file = $('#avatarFile');
-                        const orgImage = "${newUser.avatar}"
-                        if (orgImage) {
-                            const url = "images/avatar" + orgImage;
-                            $("#avatarPreview").attr("src", url);
-                            $("#avatarPreview").css({ "display": "block" });
-                        }
-                        file.change(function (e) {
-                            const imgURL = URL.createObjectURL(e.target.files[0]);
-                            $("#avatarPreview").attr("src", imgURL);
-                            $("#avatarPreview").css({ "display": "block" });
+                <style>
+                    .detail-header {
+                        background: linear-gradient(135deg, #0099CC 0%, #0073A8 100%);
+                        color: white;
+                        padding: 2rem;
+                        border-radius: 0.5rem;
+                        margin-bottom: 2rem;
+                    }
 
-                        });
-                    });
-                </script>
+                    .detail-header h1 {
+                        margin: 0;
+                        display: flex;
+                        align-items: center;
+                        gap: 0.75rem;
+                        font-size: 2rem;
+                    }
 
+                    .detail-header p {
+                        margin: 0.5rem 0 0 0;
+                        opacity: 0.9;
+                    }
+
+                    .detail-card {
+                        border: none;
+                        border-radius: 0.5rem;
+                        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+                        transition: box-shadow 0.3s ease;
+                    }
+
+                    .detail-card:hover {
+                        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+                    }
+
+                    .detail-card-header {
+                        background-color: #f8f9fa;
+                        border-bottom: 2px solid #dee2e6;
+                        padding: 1.25rem;
+                        font-weight: 600;
+                        color: #495057;
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                    }
+
+                    .avatar-container {
+                        text-align: center;
+                    }
+
+                    .avatar-img {
+                        width: 200px;
+                        height: 200px;
+                        border-radius: 0.5rem;
+                        object-fit: cover;
+                        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+                        border: 4px solid #f8f9fa;
+                    }
+
+                    .info-section {
+                        padding: 1.5rem;
+                    }
+
+                    .info-item {
+                        margin-bottom: 1.5rem;
+                        padding-bottom: 1.5rem;
+                        border-bottom: 1px solid #e9ecef;
+                    }
+
+                    .info-item:last-child {
+                        margin-bottom: 0;
+                        padding-bottom: 0;
+                        border-bottom: none;
+                    }
+
+                    .info-label {
+                        font-size: 0.875rem;
+                        font-weight: 600;
+                        color: #6c757d;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        margin-bottom: 0.5rem;
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                    }
+
+                    .info-label i {
+                        color: #0d6efd;
+                        width: 1rem;
+                    }
+
+                    .info-value {
+                        font-size: 1.125rem;
+                        color: #212529;
+                        font-weight: 500;
+                    }
+
+                    .action-footer {
+                        padding: 1.5rem;
+                        border-top: 1px solid #e9ecef;
+                        display: flex;
+                        gap: 0.75rem;
+                        flex-wrap: wrap;
+                    }
+
+                    .btn-group-custom .btn {
+                        padding: 0.5rem 1.5rem;
+                        font-weight: 500;
+                        border-radius: 0.375rem;
+                    }
+
+                    .role-badge {
+                        font-size: 0.9rem;
+                        padding: 0.5rem 1rem;
+                    }
+                </style>
             </head>
 
             <body class="sb-nav-fixed">
@@ -41,44 +138,82 @@
                     <jsp:include page="../layout/sidebar.jsp" />
                     <div id="layoutSidenav_content">
                         <main>
-                            <div class="ms-5">
-                                <h1>User Management</h1>
-                                <ol class="breadcrumb mb-4">
-                                    <li class="breadcrumb>-item"><a href="/admin">Dashboard/</a></li>
-                                    <li class="breadcrumb>-item"><a href="/admin/user">Product/</a></li>
-                                    <li class="breadcrumb-item active">Detail</li>
-                                </ol>
-                            </div>
-                            <div class="container mt-5">
-                                <div class="container mt-5">
-                                    <div class="row">
-                                        <div class="col-12 mx-auto">
-                                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h3>User Detail</h3>
-                                                <h1>Information for User ID: ${id}</h1>
-                                            </div>
-                                            <hr />
-                                            <div class="card" style=" width: 26rem;">
-                                                <div class="card-body">
-                                                    <div class="col-12 mb-3">
-                                                        <img src="/images/image/${user.avatar}"
-                                                            style="max-height:200px;">
-                                                    </div>
-                                                    <h5 class="card-title">Full Name: ${user.fullName}</h5>
-                                                    <p class="card-text">Email: ${user.email}</p>
-                                                    <p class="card-text">Phone Number: ${user.phoneNumber}</p>
-                                                    <p class="card-text">Address: ${user.address}</p>
-                                                    <p class="card-text">Role: ${user.role.name}</p>
+                            <div class="container-fluid px-4 py-4">
+                                <!-- Breadcrumb -->
+                                <nav aria-label="breadcrumb" class="mb-4">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="/admin"><i class="fas fa-home"></i>
+                                                Dashboard</a></li>
+                                        <li class="breadcrumb-item"><a href="/admin/user"><i class="fas fa-users"></i>
+                                                Users</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page"><i
+                                                class="fas fa-info-circle"></i> Detail</li>
+                                    </ol>
+                                </nav>
 
+                                <!-- Header -->
+                                <div class="detail-header">
+                                    <h1><i class="fas fa-user-circle"></i> User Detail</h1>
+                                    <p>ID: <strong>${id}</strong></p>
+                                </div>
 
+                                <!-- Main Content -->
+                                <div class="row">
+                                    <!-- Avatar and Basic Info -->
+                                    <div class="col-lg-4">
+                                        <div class="detail-card mb-4">
+                                            <div class="info-section avatar-container">
+                                                <img src="/images/avatar/${user.avatar}" alt="${user.fullName}"
+                                                    class="avatar-img" />
+                                                <div class="mt-3">
+                                                    <h5 class="mb-0" style="color: #212529;">${user.fullName}</h5>
+                                                    <span class="text-muted small">User ID: ${id}</span>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Details Section -->
+                                    <div class="col-lg-8">
+                                        <div class="detail-card">
+                                            <div class="detail-card-header">
+                                                <i class="fas fa-id-card"></i> General Information
+                                            </div>
+                                            <div class="info-section">
+                                                <div class="info-item">
+                                                    <div class="info-label"><i class="fas fa-envelope"></i> Email
+                                                        Address</div>
+                                                    <div class="info-value">${user.email}</div>
+                                                </div>
+                                                <div class="info-item">
+                                                    <div class="info-label"><i class="fas fa-phone"></i> Phone Number
+                                                    </div>
+                                                    <div class="info-value">${user.phoneNumber}</div>
+                                                </div>
+                                                <div class="info-item">
+                                                    <div class="info-label"><i class="fas fa-map-marker-alt"></i>
+                                                        Address</div>
+                                                    <div class="info-value">${user.address}</div>
+                                                </div>
+                                                <div class="info-item">
+                                                    <div class="info-label"><i class="fas fa-shield-alt"></i> Role</div>
+                                                    <div class="info-value">
+                                                        <span
+                                                            class="badge bg-primary role-badge">${user.role.name}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="action-footer">
+                                                <a href="/admin/user" class="btn btn-outline-primary"
+                                                    title="Go back to users list">
+                                                    <i class="fas fa-arrow-left"></i> Back to List
+                                                </a>
 
                                             </div>
                                         </div>
-                                        <button onclick="window.location.href='/admin/user'" class="btn btn-primary"
-                                            style="margin-top: 20px; width : 100px">Return</button>
                                     </div>
-
+                                </div>
+                            </div>
                         </main>
                         <jsp:include page="../layout/footer.jsp" />
                     </div>
@@ -86,9 +221,6 @@
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
                     crossorigin="anonymous"></script>
                 <script src="/js/scripts.js"></script>
-
-
-
             </body>
 
             </html>

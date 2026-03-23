@@ -13191,3 +13191,67 @@ body {
     font-size: 0.75rem;
     border-radius: 0.375rem !important;
 }
+
+/* Custom sky blue navbar theme */
+.sb-topnav.navbar-dark {
+    background-color: #0099CC !important;
+    background: linear-gradient(135deg, #0099CC 0%, #0073A8 100%) !important;
+}
+
+.sb-topnav.navbar-dark .navbar-brand {
+    color: white !important;
+}
+
+.sb-topnav.navbar-dark .navbar-brand:hover,
+.sb-topnav.navbar-dark .navbar-brand:focus {
+    color: white !important;
+}
+
+.sb-topnav.navbar-dark #sidebarToggle {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.sb-topnav.navbar-dark .nav-link {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.sb-topnav.navbar-dark .nav-link:hover,
+.sb-topnav.navbar-dark .nav-link:focus {
+    color: white !important;
+}
+
+.sb-topnav.navbar-dark .dropdown-toggle::after {
+    border-top-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Sidebar styling */
+.sb-sidenav.sb-sidenav-dark {
+    background: linear-gradient(180deg, #0099CC 0%, #0073A8 100%) !important;
+}
+
+.sb-sidenav.sb-sidenav-dark .sb-sidenav-menu {
+    background-color: #0088BB !important;
+}
+
+.sb-sidenav.sb-sidenav-dark .nav-link {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.sb-sidenav.sb-sidenav-dark .nav-link:hover,
+.sb-sidenav.sb-sidenav-dark .nav-link:focus {
+    color: white !important;
+    background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.sb-sidenav.sb-sidenav-dark .nav-link .sb-nav-link-icon {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.sb-sidenav.sb-sidenav-dark .sb-sidenav-menu-heading {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.sb-sidenav.sb-sidenav-dark .sb-sidenav-footer {
+    background-color: #006FA8 !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+}

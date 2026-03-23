@@ -8,13 +8,154 @@
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <meta name="description" content="" />
+                <meta name="description" content="Product Detail" />
                 <meta name="author" content="" />
-                <title>Create product</title>
+                <title>Product Detail - Admin</title>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
                 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
                 <link rel="stylesheet" href="/css/style.css">
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+                <style>
+                    .detail-header {
+                        background: linear-gradient(135deg, #0099CC 0%, #0073A8 100%);
+                        color: white;
+                        padding: 2rem;
+                        border-radius: 0.5rem;
+                        margin-bottom: 2rem;
+                    }
 
+                    .detail-header h1 {
+                        margin: 0;
+                        display: flex;
+                        align-items: center;
+                        gap: 0.75rem;
+                        font-size: 2rem;
+                    }
+
+                    .detail-header p {
+                        margin: 0.5rem 0 0 0;
+                        opacity: 0.9;
+                    }
+
+                    .detail-card {
+                        border: none;
+                        border-radius: 0.5rem;
+                        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+                        transition: box-shadow 0.3s ease;
+                    }
+
+                    .detail-card:hover {
+                        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+                    }
+
+                    .detail-card-header {
+                        background-color: #f8f9fa;
+                        border-bottom: 2px solid #dee2e6;
+                        padding: 1.25rem;
+                        font-weight: 600;
+                        color: #495057;
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                    }
+
+                    .product-image-container {
+                        text-align: center;
+                        padding: 1.5rem;
+                    }
+
+                    .product-img {
+                        max-width: 100%;
+                        height: 300px;
+                        object-fit: cover;
+                        border-radius: 0.5rem;
+                        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+                    }
+
+                    .info-section {
+                        padding: 1.5rem;
+                    }
+
+                    .info-item {
+                        margin-bottom: 1.5rem;
+                        padding-bottom: 1.5rem;
+                        border-bottom: 1px solid #e9ecef;
+                    }
+
+                    .info-item:last-child {
+                        margin-bottom: 0;
+                        padding-bottom: 0;
+                        border-bottom: none;
+                    }
+
+                    .info-label {
+                        font-size: 0.875rem;
+                        font-weight: 600;
+                        color: #6c757d;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        margin-bottom: 0.5rem;
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                    }
+
+                    .info-label i {
+                        color: #198754;
+                        width: 1rem;
+                    }
+
+                    .info-value {
+                        font-size: 1.125rem;
+                        color: #212529;
+                        font-weight: 500;
+                    }
+
+                    .price-badge {
+                        font-size: 1.75rem;
+                        font-weight: bold;
+                        color: #198754;
+                    }
+
+                    .stats-row {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 1rem;
+                    }
+
+                    .stat-item {
+                        padding: 1rem;
+                        background-color: #f8f9fa;
+                        border-radius: 0.375rem;
+                        text-align: center;
+                    }
+
+                    .stat-item-value {
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                        color: #198754;
+                    }
+
+                    .stat-item-label {
+                        font-size: 0.875rem;
+                        color: #6c757d;
+                        margin-top: 0.5rem;
+                    }
+
+                    .action-footer {
+                        padding: 1.5rem;
+                        border-top: 1px solid #e9ecef;
+                        display: flex;
+                        gap: 0.75rem;
+                        flex-wrap: wrap;
+                    }
+
+                    .btn-group-custom .btn {
+                        padding: 0.5rem 1.5rem;
+                        font-weight: 500;
+                        border-radius: 0.375rem;
+                    }
+                </style>
             </head>
 
             <body class="sb-nav-fixed">
@@ -23,51 +164,113 @@
                     <jsp:include page="../layout/sidebar.jsp" />
                     <div id="layoutSidenav_content">
                         <main>
-                            <div class="ms-5">
-                                <h1>Product Management</h1>
-                                <ol class="breadcrumb mb-4">
-                                    <li class="breadcrumb>-item"><a href="/admin">Dashboard/</a></li>
-                                    <li class="breadcrumb>-item"><a href="/admin/product">Product/</a></li>
-                                    <li class="breadcrumb-item active">Detail</li>
-                                </ol>
-                            </div>
-                            <div class="container mt-5">
-                                <div class="container mt-5">
-                                    <div class="row">
-                                        <div class="col-12 mx-auto">
-                                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h3>Product Detail</h3>
-                                                <h1>Information for product ID: ${id}</h1>
-                                            </div>
-                                            <hr />
-                                            <div class="card" style=" width: 26rem;">
-                                                <div class="card-body">
-                                                    <div class="col-12 mb-3">
-                                                        <img src="/images/image/${product.image}"
-                                                            style="max-height:200px;" alt="image preview"
-                                                            id="productPreview">
-                                                    </div>
-                                                    <h5 class="card-title">Name: ${product.name}</h5>
-                                                    <p class="card-text">Price: ${product.price}</p>
-                                                    <p class="card-text"> DetailDecs: ${product.detailDecs}</p>
-                                                    <p class="card-text">ShortDesc: ${product.shortDesc}</p>
-                                                    <p class="card-text">Factory: ${product.factory}</p>
-                                                    <p class="card-text">Target: ${product.target}</p>
-                                                    <p class="card-text">Quantity: ${product.quantity}</p>
-                                                    <p class="card-text">Sold: ${product.sold}</p>
+                            <div class="container-fluid px-4 py-4">
+                                <!-- Breadcrumb -->
+                                <nav aria-label="breadcrumb" class="mb-4">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="/admin"><i class="fas fa-home"></i>
+                                                Dashboard</a></li>
+                                        <li class="breadcrumb-item"><a href="/admin/product"><i class="fas fa-box"></i>
+                                                Products</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page"><i
+                                                class="fas fa-info-circle"></i> Detail</li>
+                                    </ol>
+                                </nav>
 
-                                                    <div class="col-12 mb-3">
-                                                        <img style="display:none; max-height: 200px;"
-                                                            alt="avatar preview" id="avatarPreview">
+                                <!-- Header -->
+                                <div class="detail-header">
+                                    <h1><i class="fas fa-box-open"></i> Product Detail</h1>
+                                    <p>ID: <strong>${id}</strong></p>
+                                </div>
+
+                                <!-- Main Content -->
+                                <div class="row">
+                                    <!-- Product Image -->
+                                    <div class="col-lg-4">
+                                        <div class="detail-card mb-4">
+                                            <div class="product-image-container">
+                                                <img src="/images/image/${product.image}" alt="${product.name}"
+                                                    class="product-img" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Product Details -->
+                                    <div class="col-lg-8">
+                                        <div class="detail-card mb-4">
+                                            <div class="detail-card-header">
+                                                <i class="fas fa-tag"></i> Product Information
+                                            </div>
+                                            <div class="info-section">
+                                                <div class="info-item">
+                                                    <div class="info-label"><i class="fas fa-heading"></i> Product Name
+                                                    </div>
+                                                    <div class="info-value">${product.name}</div>
+                                                </div>
+                                                <div class="info-item">
+                                                    <div class="info-label"><i class="fas fa-dollar-sign"></i> Price
+                                                    </div>
+                                                    <div class="price-badge">$${product.price}</div>
+                                                </div>
+                                                <div class="info-item">
+                                                    <div class="info-label"><i class="fas fa-building"></i> Factory
+                                                    </div>
+                                                    <div class="info-value">${product.factory}</div>
+                                                </div>
+                                                <div class="info-item">
+                                                    <div class="info-label"><i class="fas fa-bullseye"></i> Target</div>
+                                                    <div class="info-value">${product.target}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Description Section -->
+                                        <div class="detail-card mb-4">
+                                            <div class="detail-card-header">
+                                                <i class="fas fa-align-left"></i> Description
+                                            </div>
+                                            <div class="info-section">
+                                                <div class="info-item">
+                                                    <div class="info-label"><i class="fas fa-stream"></i> Short
+                                                        Description</div>
+                                                    <div class="info-value">${product.shortDesc}</div>
+                                                </div>
+                                                <div class="info-item">
+                                                    <div class="info-label"><i class="fas fa-file-alt"></i> Detailed
+                                                        Description</div>
+                                                    <div class="info-value">${product.detailDecs}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Inventory Section -->
+                                        <div class="detail-card">
+                                            <div class="detail-card-header">
+                                                <i class="fas fa-warehouse"></i> Inventory
+                                            </div>
+                                            <div class="info-section">
+                                                <div class="stats-row">
+                                                    <div class="stat-item">
+                                                        <div class="stat-item-label">Total Quantity</div>
+                                                        <div class="stat-item-value">${product.quantity}</div>
+                                                    </div>
+                                                    <div class="stat-item">
+                                                        <div class="stat-item-label">Sold</div>
+                                                        <div class="stat-item-value">${product.sold}</div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="action-footer">
+                                                <a href="/admin/product" class="btn btn-outline-success"
+                                                    title="Go back to products list">
+                                                    <i class="fas fa-arrow-left"></i> Back to List
+                                                </a>
 
                                             </div>
                                         </div>
-                                        <button onclick="window.location.href='/admin/product'" class="btn btn-primary"
-                                            style="margin-top: 20px; width : 100px">Return</button>
                                     </div>
-
+                                </div>
+                            </div>
                         </main>
                         <jsp:include page="../layout/footer.jsp" />
                     </div>
@@ -75,9 +278,6 @@
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
                     crossorigin="anonymous"></script>
                 <script src="/js/scripts.js"></script>
-
-
-
             </body>
 
             </html>

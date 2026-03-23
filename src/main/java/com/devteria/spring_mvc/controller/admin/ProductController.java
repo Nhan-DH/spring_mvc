@@ -105,6 +105,7 @@ public class ProductController {
     @GetMapping("admin/product/delete/{id}")
     public String deleteProduct(Model model, @PathVariable long id) {
         model.addAttribute("id", id);
+        model.addAttribute("product", this.productService.getProductById(id));
         return "admin/product/delete";
     }
 

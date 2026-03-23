@@ -9,10 +9,64 @@
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
             <meta name="description" content="" />
             <meta name="author" content="" />
-            <title>Dashboard - SB Admin</title>
+            <title>Order Management - Admin</title>
             <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
             <link rel="stylesheet" href="/css/style.css">
             <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+            <style>
+                .table-container {
+                    background: #fff;
+                    border-radius: 0.5rem;
+                    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+                    overflow: hidden;
+                }
+                .table-header {
+                    background: linear-gradient(135deg, #0099CC 0%, #0073A8 100%);
+                    padding: 1.5rem;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 1rem;
+                }
+                .table-header h3 {
+                    color: white;
+                    margin: 0;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }
+                table th {
+                    background-color: #f8f9fa;
+                    font-weight: 600;
+                    color: #495057;
+                    border-bottom: 2px solid #dee2e6;
+                    white-space: nowrap;
+                }
+                table th i {
+                    margin-right: 0.5rem;
+                    color: #0099CC;
+                }
+                table tbody tr {
+                    transition: background-color 0.2s ease;
+                }
+                table tbody tr:hover {
+                    background-color: #f8f9fa;
+                }
+                .status-badge {
+                    padding: 0.4rem 0.8rem;
+                    border-radius: 0.25rem;
+                    font-weight: 500;
+                }
+                .action-buttons {
+                    display: flex;
+                    gap: 0.5rem;
+                    flex-wrap: wrap;
+                }
+                .action-buttons .btn {
+                    padding: 0.375rem 0.75rem;
+                    font-size: 0.875rem;
+                }
+            </style>
         </head>
 
         <body class="sb-nav-fixed">
@@ -22,50 +76,57 @@
                 <div id="layoutSidenav_content">
                     <main>
                         <div class="ms-5">
-                            <h1>Order Management</h1>
+                            <h1><i class="fas fa-shopping-bag"></i> Order Management</h1>
                             <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb>-item"><a href="/admin">Dashboard/</a></li>
-                                <li class="breadcrumb-item active">Order</li>
+                                <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Orders</li>
                             </ol>
                         </div>
-                        <div class="container mt-5">
+                        <div class="container-fluid mt-4">
                             <div class="row">
-                                <div class="col-12 mx-auto">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h3>Table Order</h3>
-
+                                <div class="col-12">
+                                    <div class="table-container">
+                                        <div class="table-header">
+                                            <h3><i class="fas fa-list"></i> Order List</h3>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover align-middle mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th><i class="fas fa-hashtag"></i> ID</th>
+                                                        <th><i class="fas fa-dollar-sign"></i> Total Price</th>
+                                                        <th><i class="fas fa-envelope"></i> User</th>
+                                                        <th><i class="fas fa-info-circle"></i> Status</th>
+                                                        <th><i class="fas fa-cog"></i> Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${orders}" var="order">
+                                                        <tr>
+                                                            <td><strong>${order.id}</strong></td>
+                                                            <td><strong class="text-info">$${order.totalPrice}</strong></td>
+                                                            <td>${order.user.email}</td>
+                                                            <td>
+                                                                <c:choose>
+                                                                    <c:when test="${order.status == 'Pending'}"><span class="status-badge bg-warning text-dark">${order.status}</span></c:when>
+                                                                    <c:when test="${order.status == 'Completed'}"><span class="status-badge bg-success text-white">${order.status}</span></c:when>
+                                                                    <c:when test="${order.status == 'Cancelled'}"><span class="status-badge bg-danger text-white">${order.status}</span></c:when>
+                                                                    <c:otherwise><span class="status-badge bg-secondary text-white">${order.status}</span></c:otherwise>
+                                                                </c:choose>
+                                                            </td>
+                                                            <td>
+                                                                <div class="action-buttons">
+                                                                    <a href="/admin/order/${order.id}" class="btn btn-sm btn-info" title="View"><i class="fas fa-eye"></i></a>
+                                                                    <a href="/admin/order/update/${order.id}" class="btn btn-sm btn-warning" title="Update"><i class="fas fa-edit"></i></a>
+                                                                    <a href="/admin/order/delete/${order.id}" class="btn btn-sm btn-danger" title="Delete"><i class="fas fa-trash"></i></a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                    <hr />
-                                    <table class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Total Price</th>
-                                                <th>User</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach items="${orders}" var="order">
-                                                <tr>
-                                                    <td>${order.id}</td>
-                                                    <td>${order.totalPrice}</td>
-                                                    <td>${order.user.email}</td>
-                                                    <td>${order.status}</td>
-
-                                                    <td>
-                                                        <a href="/admin/order/${order.id}" class="btn btn-info">View</a>
-                                                        <a href="/admin/order/update/${order.id}"
-                                                            class="btn btn-warning">Update</a>
-                                                        <a href="/admin/order/delete/${order.id}"
-                                                            class="btn btn-danger">Delete</a>
-                                                    </td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-
-                                    </table>
                                 </div>
                             </div>
                     </main>
