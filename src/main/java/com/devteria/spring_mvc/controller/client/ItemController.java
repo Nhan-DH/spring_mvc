@@ -111,9 +111,15 @@ public class ItemController {
             @RequestParam("receiverNote") String receiverNote
 
     ) {
-        HttpSession session = request.getSession(false);
 
-        return "redirect:/";
+        User curUser = new User();
+        HttpSession session = request.getSession(false);
+        long id = (long) session.getAttribute("id");
+        curUser.setId(id);
+
+        this.productService.handlePlaceOrder(curUser, session, receiveName, receiverPhone, receiverAddress,
+                receiverNote);
+        return "client/cart/thanks";
     }
 
 }
