@@ -20,6 +20,7 @@
                     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
                     overflow: hidden;
                 }
+
                 .table-header {
                     background: linear-gradient(135deg, #0099CC 0%, #0073A8 100%);
                     padding: 1.5rem;
@@ -28,6 +29,7 @@
                     align-items: center;
                     gap: 1rem;
                 }
+
                 .table-header h3 {
                     color: white;
                     margin: 0;
@@ -35,6 +37,7 @@
                     align-items: center;
                     gap: 0.5rem;
                 }
+
                 table th {
                     background-color: #f8f9fa;
                     font-weight: 600;
@@ -42,26 +45,32 @@
                     border-bottom: 2px solid #dee2e6;
                     white-space: nowrap;
                 }
+
                 table th i {
                     margin-right: 0.5rem;
                     color: #0099CC;
                 }
+
                 table tbody tr {
                     transition: background-color 0.2s ease;
                 }
+
                 table tbody tr:hover {
                     background-color: #f8f9fa;
                 }
+
                 .status-badge {
                     padding: 0.4rem 0.8rem;
                     border-radius: 0.25rem;
                     font-weight: 500;
                 }
+
                 .action-buttons {
                     display: flex;
                     gap: 0.5rem;
                     flex-wrap: wrap;
                 }
+
                 .action-buttons .btn {
                     padding: 0.375rem 0.75rem;
                     font-size: 0.875rem;
@@ -104,21 +113,36 @@
                                                     <c:forEach items="${orders}" var="order">
                                                         <tr>
                                                             <td><strong>${order.id}</strong></td>
-                                                            <td><strong class="text-info">$${order.totalPrice}</strong></td>
+                                                            <td><strong class="text-info">$${order.totalPrice}</strong>
+                                                            </td>
                                                             <td>${order.user.email}</td>
                                                             <td>
                                                                 <c:choose>
-                                                                    <c:when test="${order.status == 'Pending'}"><span class="status-badge bg-warning text-dark">${order.status}</span></c:when>
-                                                                    <c:when test="${order.status == 'Completed'}"><span class="status-badge bg-success text-white">${order.status}</span></c:when>
-                                                                    <c:when test="${order.status == 'Cancelled'}"><span class="status-badge bg-danger text-white">${order.status}</span></c:when>
-                                                                    <c:otherwise><span class="status-badge bg-secondary text-white">${order.status}</span></c:otherwise>
+                                                                    <c:when test="${order.status == 'Pending'}"><span
+                                                                            class="status-badge bg-warning text-dark">${order.status}</span>
+                                                                    </c:when>
+                                                                    <c:when test="${order.status == 'Completed'}"><span
+                                                                            class="status-badge bg-success text-white">${order.status}</span>
+                                                                    </c:when>
+                                                                    <c:when test="${order.status == 'Cancelled'}"><span
+                                                                            class="status-badge bg-danger text-white">${order.status}</span>
+                                                                    </c:when>
+                                                                    <c:otherwise><span
+                                                                            class="status-badge bg-secondary text-white">${order.status}</span>
+                                                                    </c:otherwise>
                                                                 </c:choose>
                                                             </td>
                                                             <td>
                                                                 <div class="action-buttons">
-                                                                    <a href="/admin/order/${order.id}" class="btn btn-sm btn-info" title="View"><i class="fas fa-eye"></i></a>
-                                                                    <a href="/admin/order/update/${order.id}" class="btn btn-sm btn-warning" title="Update"><i class="fas fa-edit"></i></a>
-                                                                    <a href="/admin/order/delete/${order.id}" class="btn btn-sm btn-danger" title="Delete"><i class="fas fa-trash"></i></a>
+                                                                    <a href="/admin/order/${order.id}"
+                                                                        class="btn btn-sm btn-info" title="View"><i
+                                                                            class="fas fa-eye"></i></a>
+                                                                    <a href="/admin/order/update/${order.id}"
+                                                                        class="btn btn-sm btn-warning" title="Update"><i
+                                                                            class="fas fa-edit"></i></a>
+                                                                    <a href="/admin/order/delete/${order.id}"
+                                                                        class="btn btn-sm btn-danger" title="Delete"><i
+                                                                            class="fas fa-trash"></i></a>
                                                                 </div>
                                                             </td>
                                                         </tr>

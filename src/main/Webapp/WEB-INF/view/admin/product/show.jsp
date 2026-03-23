@@ -20,6 +20,7 @@
                     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
                     overflow: hidden;
                 }
+
                 .table-header {
                     background: linear-gradient(135deg, #0099CC 0%, #0073A8 100%);
                     padding: 1.5rem;
@@ -28,6 +29,7 @@
                     align-items: center;
                     gap: 1rem;
                 }
+
                 .table-header h3 {
                     color: white;
                     margin: 0;
@@ -35,16 +37,19 @@
                     align-items: center;
                     gap: 0.5rem;
                 }
+
                 .btn-create {
                     background: #fff;
                     color: #0099CC;
                     border: none;
                     font-weight: 600;
                 }
+
                 .btn-create:hover {
                     background: #f8f9fa;
                     color: #0099CC;
                 }
+
                 table th {
                     background-color: #f8f9fa;
                     font-weight: 600;
@@ -52,21 +57,26 @@
                     border-bottom: 2px solid #dee2e6;
                     white-space: nowrap;
                 }
+
                 table th i {
                     margin-right: 0.5rem;
                     color: #0099CC;
                 }
+
                 table tbody tr {
                     transition: background-color 0.2s ease;
                 }
+
                 table tbody tr:hover {
                     background-color: #f8f9fa;
                 }
+
                 .action-buttons {
                     display: flex;
                     gap: 0.5rem;
                     flex-wrap: wrap;
                 }
+
                 .action-buttons .btn {
                     padding: 0.375rem 0.75rem;
                     font-size: 0.875rem;
@@ -93,7 +103,8 @@
                                     <div class="table-container">
                                         <div class="table-header">
                                             <h3><i class="fas fa-list"></i> Product List</h3>
-                                            <a href="/admin/product/create" class="btn btn-create"><i class="fas fa-plus"></i> Add New Product</a>
+                                            <a href="/admin/product/create" class="btn btn-create"><i
+                                                    class="fas fa-plus"></i> Add New Product</a>
                                         </div>
                                         <div class="table-responsive">
                                             <table class="table table-hover align-middle mb-0">
@@ -111,13 +122,20 @@
                                                         <tr>
                                                             <td><strong>${product.id}</strong></td>
                                                             <td>${product.name}</td>
-                                                            <td><strong class="text-success">$${product.price}</strong></td>
+                                                            <td><strong class="text-success">$${product.price}</strong>
+                                                            </td>
                                                             <td>${product.factory}</td>
                                                             <td>
                                                                 <div class="action-buttons">
-                                                                    <a href="/admin/product/${product.id}" class="btn btn-sm btn-info" title="View"><i class="fas fa-eye"></i></a>
-                                                                    <a href="/admin/product/update/${product.id}" class="btn btn-sm btn-warning" title="Update"><i class="fas fa-edit"></i></a>
-                                                                    <a href="/admin/product/delete/${product.id}" class="btn btn-sm btn-danger" title="Delete"><i class="fas fa-trash"></i></a>
+                                                                    <a href="/admin/product/${product.id}"
+                                                                        class="btn btn-sm btn-info" title="View"><i
+                                                                            class="fas fa-eye"></i></a>
+                                                                    <a href="/admin/product/update/${product.id}"
+                                                                        class="btn btn-sm btn-warning" title="Update"><i
+                                                                            class="fas fa-edit"></i></a>
+                                                                    <a href="/admin/product/delete/${product.id}"
+                                                                        class="btn btn-sm btn-danger" title="Delete"><i
+                                                                            class="fas fa-trash"></i></a>
                                                                 </div>
                                                             </td>
                                                         </tr>
