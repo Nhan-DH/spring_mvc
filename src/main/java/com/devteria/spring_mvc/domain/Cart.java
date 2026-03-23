@@ -21,9 +21,13 @@ public class Cart {
 
     @Min(value = 0)
     private int sum;
+
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "cart")
+    private List<CartDetail> cartDetails;
 
     public long getId() {
         return id;
@@ -49,15 +53,11 @@ public class Cart {
         this.user = user;
     }
 
-    public List<CartDetail> getCartDetail() {
-        return cartDetail;
+    public List<CartDetail> getCartDetails() {
+        return cartDetails;
     }
 
-    public void setCartDetail(List<CartDetail> cartDetail) {
-        this.cartDetail = cartDetail;
+    public void setCartDetails(List<CartDetail> cartDetails) {
+        this.cartDetails = cartDetails;
     }
-
-    @OneToMany(mappedBy = "cart")
-    List<CartDetail> cartDetail;
-
 }

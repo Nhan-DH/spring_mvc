@@ -149,6 +149,12 @@
         }
         const input = button.parent().parent().find('input');
         input.val(newVal);
+        //set form index
+        const index = input.attr('data-cart-detail-index');
+        const el = document.getElementById(`cartDetails${index}.quantity`);
+        $(el).val(newVal);
+
+
         const price = input.data('cart-detail-price');
         const cartDetailId = input.data('cart-detail-id');
         const newPriceElement = $(`p[data-cart-detail-id="${cartDetailId}"]`);

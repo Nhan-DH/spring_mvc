@@ -8,6 +8,7 @@ import org.springframework.boot.actuate.autoconfigure.observation.ObservationPro
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -22,6 +23,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.server.PathParam;
 
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ItemController {
@@ -56,14 +58,33 @@ public class ItemController {
         long id = (long) session.getAttribute("id");
         curUser.setId(id);
         Cart cart = this.productService.getCartByUser(curUser);
-        List<CartDetail> cartDetails = cart == null ? new ArrayList<CartDetail>() : cart.getCartDetail();
+        List<CartDetail> cartDetails = cart == null ? new ArrayList<CartDetail>() : cart.getCartDetails();
         double total = 0;
         for (CartDetail cd : cartDetails) {
             total += cd.getPrice() * cd.getQuantity();
         }
         model.addAttribute("cartDetails", cartDetails);
         model.addAttribute("total", total);
+        model.addAttribute("cart", cart);
         return "client/cart/show";
+    }
+
+    @GetMapping("/confirm-checkout")
+    public String getCheckout(Model model, HttpServletRequest request) {
+        User curUser = new User();
+        HttpSession session = request.getSession(false);
+        long id = (long) session.getAttribute("id");
+        curUser.setId(id);
+        Cart cart = this.productService.getCartByUser(curUser);
+        List<CartDetail> cartDetails = cart == null ? new ArrayList<CartDetail>() : cart.getCartDetails();
+        double total = 0;
+        for (CartDetail cd : cartDetails) {
+            total += cd.getPrice() * cd.getQuantity();
+        }
+        model.addAttribute("cartDetails", cartDetails);
+        model.addAttribute("total", total);
+        model.addAttribute("cart", cart);
+        return "client/cart/checkout";
     }
 
     @PostMapping("/delete-cart-detail/{id}")
@@ -73,6 +94,26 @@ public class ItemController {
         this.productService.handleRemoveCartDetail(cartDetailId, session);
 
         return "redirect:/cart";
+    }
+
+    @PostMapping("/confirm-checkout")
+    public String getCheckOutPage(@ModelAttribute("cart") Cart cart) {
+        List<CartDetail> cartDetails = cart == null ? new ArrayList<CartDetail>() : cart.getCartDetails();
+        this.productService.handleUpdateCartBeforeCheckOut(cartDetails);
+        return "redirect:/confirm-checkout";
+    }
+
+    @PostMapping("/place-order")
+    public String handlePlaceOrder(HttpServletRequest request,
+            @RequestParam("receiverName") String receiveName,
+            @RequestParam("receiverPhone") String receiverPhone,
+            @RequestParam("receiverAddress") String receiverAddress,
+            @RequestParam("receiverNote") String receiverNote
+
+    ) {
+        HttpSession session = request.getSession(false);
+
+        return "redirect:/";
     }
 
 }
