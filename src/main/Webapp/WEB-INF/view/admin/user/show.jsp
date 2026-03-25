@@ -142,6 +142,34 @@
                                                     </c:forEach>
                                                 </tbody>
                                             </table>
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination justify-content-center mt-4">
+                                                    <li class="page-item">
+                                                        <a class="${1 == currentPage ? 'page-link disabled' : 'page-link'}"
+                                                            href="/admin/user?page=${currentPage - 1}"
+                                                            aria-label="Previous">
+                                                            <span aria-hidden="true">&laquo;</span>
+                                                            <span class="sr-only">Previous</span>
+                                                        </a>
+                                                    </li>
+                                                    <c:forEach begin="1" end="${totalPages}" var="loop">
+                                                        <li class="page-item">
+                                                            <a class="${loop == currentPage ? 'page-link active' : 'page-link'}"
+                                                                href="/admin/user?page=${loop}">
+                                                                ${loop}
+                                                            </a>
+                                                        </li>
+                                                    </c:forEach>
+                                                    <li class="page-item">
+                                                        <a class="${totalPages == currentPage ? 'page-link disabled' : 'page-link'}"
+                                                            href="/admin/user?page=${currentPage + 1}"
+                                                            aria-label="Next">
+                                                            <span aria-hidden="true">&raquo;</span>
+                                                            <span class="sr-only">Next</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
                                         </div>
                                     </div>
                                 </div>

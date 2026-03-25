@@ -2,6 +2,8 @@ package com.devteria.spring_mvc.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.devteria.spring_mvc.domain.Role;
@@ -35,8 +37,8 @@ public class UserService {
         return this.userRepository.findById(id);
     }
 
-    public List<User> getAllUsers() {
-        return this.userRepository.findAll();
+    public Page<User> getAllUsers(Pageable page) {
+        return this.userRepository.findAll(page);
     }
 
     public User updatUser(User user) {
@@ -80,4 +82,5 @@ public class UserService {
     public long countOrders() {
         return this.orderRepository.count();
     }
+
 }

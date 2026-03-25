@@ -4,7 +4,11 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.nio.Buffer;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.devteria.spring_mvc.domain.Product;
 import com.devteria.spring_mvc.domain.User;
 import com.devteria.spring_mvc.repository.UserRepository;
 import com.devteria.spring_mvc.service.UploadService;
@@ -88,10 +93,25 @@ public class UserController {
         return "redirect:/admin/user";
     }
 
-    @RequestMapping(value = "/admin/user", method = RequestMethod.GET)
-    public String userTable(Model model) {
-        List<User> users = this.userService.getAllUsers();
-        model.addAttribute("users", users);
+    @GetMapping(value = "/admin/user")
+    public String getUser(Model model, @RequestParam("page") Optional<String> pageOptional) {
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                page = Integer.parseInt(pageOptional.get());
+            } else {
+                page = 1;
+            }
+        } catch (Exception e) {
+
+        }
+        Pageable pageable = PageRequest.of(page - 1, 5); // CTRL clink of để xem chi tiết hàm of
+        Page<User> prs = this.userService.getAllUsers(pageable);
+        List<User> listUsers = prs.getContent();
+        model.addAttribute("users", listUsers);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", prs.getTotalPages());
+
         return "admin/user/show";
     }
 

@@ -3,6 +3,9 @@ package com.devteria.spring_mvc.controller.admin;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.devteria.spring_mvc.domain.Order;
 import com.devteria.spring_mvc.domain.Order;
 import com.devteria.spring_mvc.service.OrderService;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,14 +30,29 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/admin/order", method = RequestMethod.GET)
-    public String userTable(Model model) {
-        List<Order> orders = this.orderService.getAllOrders();
-        model.addAttribute("orders", orders);
+    public String getOrder(Model model, @RequestParam("page") Optional<String> pageOptional) {
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                page = Integer.parseInt(pageOptional.get());
+            } else {
+                page = 1;
+            }
+        } catch (Exception e) {
+
+        }
+        Pageable pageable = PageRequest.of(page - 1, 5); // CTRL clink of để xem chi tiết hàm of
+        Page<Order> prs = this.orderService.getAllOrders(pageable);
+        List<Order> listOrders = prs.getContent();
+        model.addAttribute("orders", listOrders);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", prs.getTotalPages());
+
         return "admin/order/show";
     }
 
     @GetMapping("/admin/order/{id}")
-    public String getOrder(@PathVariable Long id, Model model) {
+    public String getOrderItem(@PathVariable Long id, Model model) {
         Order order = this.orderService.getOrderById(id);
         model.addAttribute("order", order);
         model.addAttribute("id", id);

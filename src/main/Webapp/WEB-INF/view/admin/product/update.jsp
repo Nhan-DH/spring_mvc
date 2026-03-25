@@ -158,15 +158,15 @@
                 </style>
                 <script>
                     $(document).ready(function () {
-                        const file = $(''#productFile'');
+                        const file = $('#productFile');
                         const orgImage = "${newProduct.image}";
                         if (orgImage) {
                             const url = "/images/image/" + orgImage;
-                            $(''#productPreview'').attr("src", url).addClass("show");
+                            $('#productPreview').attr("src", url).addClass("show");
                         }
                         file.change(function (e) {
                             const imgURL = URL.createObjectURL(e.target.files[0]);
-                            $(''#productPreview'').attr("src", imgURL).addClass("show");
+                            $('#productPreview').attr("src", imgURL).addClass("show");
                         });
                     });
                 </script>
