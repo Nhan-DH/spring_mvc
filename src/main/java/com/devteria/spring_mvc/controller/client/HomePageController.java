@@ -110,8 +110,13 @@ public class HomePageController {
     }
 
     @GetMapping("/client/products")
-    public String getAllProducts() {
+    public String getProducts(Model model) {
 
+        Pageable pageable = PageRequest.of(0, 8); // CTRL clink of để xem chi tiết hàm of
+        Page<Product> prs = this.productService.fetchProducts(pageable);
+        List<Product> listProducts = prs.getContent();
+        model.addAttribute("products", listProducts);
         return "client/product/show";
+
     }
 }

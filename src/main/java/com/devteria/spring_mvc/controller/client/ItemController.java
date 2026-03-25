@@ -48,6 +48,12 @@ public class ItemController {
         String email = (String) session.getAttribute("email");
         this.productService.handleAddProductToCart(email, productId, session);
 
+        // Check if user came from products page and redirect back there
+        String referer = request.getHeader("Referer");
+        if (referer != null && referer.contains("/client/products")) {
+            return "redirect:/client/products";
+        }
+        
         return "redirect:/";
     }
 

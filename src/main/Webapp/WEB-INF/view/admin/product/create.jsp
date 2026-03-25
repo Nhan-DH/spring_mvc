@@ -126,6 +126,8 @@
                                                 <form:option value="Lenovo">Lenovo</form:option>
                                                 <form:option value="Dell">Dell</form:option>
                                                 <form:option value="Asus">Asus</form:option>
+                                                <form:option value="Acer">Acer</form:option>
+                                                <form:option value="LG">LG</form:option>
                                             </form:select>
                                         </div>
                                         <div class="col-md-6 mb-3">
@@ -133,8 +135,11 @@
                                                 <label for="formFile" class="form-label">Target</label>
                                                 <form:select path="target" class="form-select">
                                                     <form:option value="GAMING">GAMING</form:option>
-                                                    <form:option value="BUSINESS">BUSINESS</form:option>
+                                                    <form:option value="OFFICE WORK">OFFICE WORK</form:option>
                                                     <form:option value="STUDENT">STUDENT</form:option>
+                                                    <form:option value="DESIGN&Editing">DESIGN & EDITING</form:option>
+                                                    <form:option value="DEVELOPMENT">DEVELOPMENT</form:option>
+
                                                 </form:select>
                                             </div>
                                         </div>
