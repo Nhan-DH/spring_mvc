@@ -29,17 +29,17 @@
                     <div class="col-md-8 col-lg-6">
                         <div class="bg-light rounded p-5 text-center">
                             <i class="fa fa-check-circle text-success mb-4" style="font-size: 80px;"></i>
-                            <h1 class="display-6 mb-3">Đặt hàng thành công!</h1>
+                            <h1 class="display-6 mb-3">Order Placed Successfully!</h1>
                             <p class="mb-4">
-                                Cảm ơn bạn đã đặt hàng. Đơn hàng của bạn đang được xử lý.
+                                Thank you for your order. Your order is being processed.
                             </p>
 
                             <div class="d-flex gap-3 justify-content-center">
                                 <a href="/" class="btn border-secondary rounded-pill px-4 py-3 text-primary">
-                                    Về trang chủ
+                                    Back to Home
                                 </a>
                                 <a href="/cart" class="btn border-secondary rounded-pill px-4 py-3 text-primary">
-                                    Quay lại giỏ hàng
+                                    Back to Cart
                                 </a>
                             </div>
                         </div>
@@ -49,6 +49,11 @@
         </div>
 
         <jsp:include page="/WEB-INF/view/client/layout/footer.jsp" />
+
+        <!-- JavaScript Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/client/js/main.js"></script>
     </body>
 
     </html>

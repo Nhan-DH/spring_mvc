@@ -45,7 +45,7 @@ public class HomePageController {
     @GetMapping("/")
     public String getMethodName(Model model) {
 
-        Pageable pageable = PageRequest.of(0, 10); // CTRL clink of để xem chi tiết hàm of
+        Pageable pageable = PageRequest.of(0, 8); // CTRL clink of để xem chi tiết hàm of
         Page<Product> prs = this.productService.fetchProducts(pageable);
         List<Product> listProducts = prs.getContent();
         model.addAttribute("products", listProducts);
@@ -97,4 +97,21 @@ public class HomePageController {
         return "client/cart/my-orders";
     }
 
+    @GetMapping("/contact")
+    public String getContact() {
+
+        return "client/contact";
+    }
+
+    @GetMapping("/client/account")
+    public String getAccount() {
+
+        return "client/auth/account";
+    }
+
+    @GetMapping("/client/products")
+    public String getAllProducts() {
+
+        return "client/product/show";
+    }
 }

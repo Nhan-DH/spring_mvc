@@ -10,6 +10,17 @@
         }, 1);
     };
     spinner(0);
+    // add active class to header 
+    const navElements = $("#navbarCollapse");
+    const currentPath = window.location.pathname;
+    navElements.find("a.nav-link").each(function () {
+        const linkPath = $(this).attr("href");
+        if (linkPath === currentPath) {
+            $(this).addClass("active");
+        } else {
+            $(this).removeClass("active");
+        }
+    });
 
 
     // Fixed Navbar

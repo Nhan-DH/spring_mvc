@@ -25,13 +25,17 @@
 
                         <div class="collapse navbar-collapse bg-white justify-content-between mx-5" id="navbarCollapse">
                             <div class="navbar-nav">
+
                                 <a href="/" class="nav-item nav-link ${currentUrl == '/' ? 'active' : ''}">
                                     Home
                                 </a>
-
+                                <a href="/client/products"
+                                    class="nav-item nav-link ${fn:startsWith(currentUrl, '/client/products') ? 'active' : ''}">
+                                    All Products
+                                </a>
                                 <a href="/client/my-orders"
                                     class="nav-item nav-link ${fn:startsWith(currentUrl, '/client/my-orders') ? 'active' : ''}">
-                                    My Orders
+                                    History Orders
                                 </a>
 
                                 <a href="/client/account"
@@ -39,10 +43,11 @@
                                     Account
                                 </a>
 
-                                <a href="/client/contact"
+                                <a href="/contact"
                                     class="nav-item nav-link ${fn:startsWith(currentUrl, '/client/contact') ? 'active' : ''}">
                                     Contact
                                 </a>
+
                             </div>
 
                             <div class="d-flex m-3 me-0">
