@@ -32,6 +32,23 @@
 
             <!-- Template Stylesheet -->
             <link href="/client/css/style.css" rel="stylesheet">
+
+            <!-- Pagination Disabled Fix -->
+            <style>
+                .page-link.disabled {
+                    pointer-events: none !important;
+                    cursor: not-allowed !important;
+                    opacity: 0.5;
+                    background-color: #e9ecef !important;
+                    color: #6c757d !important;
+                }
+
+                .page-link.active {
+                    background-color: #0d6efd;
+                    color: white;
+                    border-color: #0d6efd;
+                }
+            </style>
         </head>
 
         <body>
@@ -247,20 +264,28 @@
                         </div>
                         <div class="col-lg-8">
                             <div class="row g-4 justify-content-center">
-                                <div class="col-md-6 col-lg-6 col-xl-4">
-                                    <jsp:include page="/WEB-INF/view/client/layout/item-laptop.jsp" />
-                                </div>
+                                <jsp:include page="/WEB-INF/view/client/layout/item-laptop.jsp" />
 
                                 <div class="col-12">
                                     <div class="pagination d-flex justify-content-center mt-5">
-                                        <a href="#" class="rounded">&laquo;</a>
-                                        <a href="#" class="active rounded">1</a>
-                                        <a href="#" class="rounded">2</a>
-                                        <a href="#" class="rounded">3</a>
-                                        <a href="#" class="rounded">4</a>
-                                        <a href="#" class="rounded">5</a>
-                                        <a href="#" class="rounded">6</a>
-                                        <a href="#" class="rounded">&raquo;</a>
+                                        <a class="${1 == currentPage ? 'page-link disabled' : 'page-link'}"
+                                            href="/client/products?page=${currentPage - 1}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <c:forEach begin="1" end="${totalPages}" var="loop">
+                                            <li class="page-item">
+                                                <a class="${loop == currentPage ? 'page-link active' : 'page-link'}"
+                                                    href="/client/products?page=${loop}">
+                                                    ${loop}
+                                                </a>
+                                            </li>
+                                        </c:forEach>
+                                        <a class="${totalPages == currentPage ? 'page-link disabled' : 'page-link'}"
+                                            href="/client/products?page=${currentPage + 1}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

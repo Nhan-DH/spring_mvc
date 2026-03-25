@@ -1,6 +1,7 @@
 package com.devteria.spring_mvc.controller.client;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
 import org.springframework.data.domain.Page;
@@ -110,12 +111,23 @@ public class HomePageController {
     }
 
     @GetMapping("/client/products")
-    public String getProducts(Model model) {
+    public String getProducts(Model model, @RequestParam("page") Optional<String> pageOptional) {
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                page = Integer.parseInt(pageOptional.get());
+            } else {
+                page = 1;
+            }
+        } catch (Exception e) {
 
-        Pageable pageable = PageRequest.of(0, 8); // CTRL clink of để xem chi tiết hàm of
+        }
+        Pageable pageable = PageRequest.of(page - 1, 8); // CTRL clink of để xem chi tiết hàm of
         Page<Product> prs = this.productService.fetchProducts(pageable);
         List<Product> listProducts = prs.getContent();
         model.addAttribute("products", listProducts);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", prs.getTotalPages());
         return "client/product/show";
 
     }
