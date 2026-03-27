@@ -30,7 +30,12 @@ public class OrderService {
     }
 
     public void updateOrder(Order order) {
-        this.orderRepository.save(order);
+        Order currentOrder = this.orderRepository.findById(order.getId());
+        if (currentOrder != null) {
+            // Only update editable fields to avoid losing existing data like createdDate.
+            currentOrder.setStatus(order.getStatus());
+            this.orderRepository.save(currentOrder);
+        }
     }
 
     public void deleteOrderById(long id) {
