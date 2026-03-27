@@ -11,6 +11,7 @@ import com.devteria.spring_mvc.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -165,6 +166,7 @@ public class ProductService {
                 order.setReceiverPhone(receivePhone);
                 order.setReceiverAddress(receiveAddress);
                 order.setReceiverNote(receiverNote);
+                order.setCreatedDate(new Date());
                 order.setStatus("Pending");
                 double sum = 0;
                 for (CartDetail cd : cartDetails) {

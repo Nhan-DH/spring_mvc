@@ -45,7 +45,12 @@ public class OrderService {
         this.orderRepository.deleteById(id);
     }
 
+    // public List<Order> getOrdersByUserId(long userId) {
+    // return this.orderRepository.findByUserId(userId);
+    // }
+    // lấy user theo date
     public List<Order> getOrdersByUserId(long userId) {
-        return this.orderRepository.findByUserId(userId);
+        return this.orderRepository.findByUserIdOrderByCreatedDateDescIdDesc(userId);
     }
+
 }

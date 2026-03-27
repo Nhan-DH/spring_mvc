@@ -35,7 +35,7 @@
                                 </a>
                                 <a href="/client/my-orders"
                                     class="nav-item nav-link ${fn:startsWith(currentUrl, '/client/my-orders') ? 'active' : ''}">
-                                    History Orders
+                                    Orders
                                 </a>
 
                                 <a href="/client/account"

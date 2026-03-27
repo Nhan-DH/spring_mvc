@@ -1,12 +1,13 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
         <!DOCTYPE html>
         <html lang="en">
 
         <head>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2220%22%20fill%3D%22%230A0A0A%22/%3E%3Cpath%20d%3D%22M%2020%2020%20h%2030%20a%2030%2030%200%200%201%2030%2030%20a%2030%2030%200%200%201%20-30%2030%20h%20-30%20v%20-60%20z%20M%2032%2032%20v%2036%20h%2018%20a%2018%2018%200%200%200%2018%20-18%20a%2018%2018%200%200%200%20-18%20-18%20h%20-18%20z%22%20fill%3D%22%232d2d2d%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%228%22%20fill%3D%22%230066FF%22/%3E%3C/svg%3E" />
             <meta charset="utf-8">
-            <title>Home</title>
+            <title>NYAN SHOP</title>
             <meta content="width=device-width, initial-scale=1.0" name="viewport">
             <meta content="" name="keywords">
             <meta content="" name="description">
@@ -78,16 +79,16 @@
                         <div class="row g-4">
                             <div class="col-12">
                                 <div class="text-center mx-auto" style="max-width: 700px;">
-                                    <h1 class="text-primary">Get in touch</h1>
-                                    <p class="mb-4">The contact form is currently inactive. Get a functional and working
-                                        contact form with Ajax & PHP in a few minutes. Just copy and paste the files,
-                                        add a little code and you're done. <a href="#">Download Now</a>.</p>
+                                    <h1 class="text-primary">Contact NyanShop</h1>
+                                    <p class="mb-4">We'd love to hear from you! Whether you have questions about our
+                                        laptops, need technical support, or want to share feedback, please don't
+                                        hesitate to reach out. Our team at NyanShop is here to help!</p>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="h-100 rounded">
                                     <iframe class="rounded w-100" style="height: 400px;"
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.33750346623!2d-73.97968099999999!3d40.6974881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1694259649153!5m2!1sen!2sbd"
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.906948519925!2d105.84075!3d21.0048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab13c5fbce09%3A0x29fcacfc2bf0a77a!2sBachKhoa%20Hanoi%20University%20of%20Science%20and%20Technology!5e0!3m2!1sen!2svn!4v1703000000000"
                                         loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                 </div>
                             </div>
@@ -108,21 +109,21 @@
                                     <i class="fas fa-map-marker-alt fa-2x text-primary me-4"></i>
                                     <div>
                                         <h4>Address</h4>
-                                        <p class="mb-2">123 Street New York.USA</p>
+                                        <p class="mb-2">Hanoi University of Science and Technology, Vietnam</p>
                                     </div>
                                 </div>
                                 <div class="d-flex p-4 rounded mb-4 bg-white">
                                     <i class="fas fa-envelope fa-2x text-primary me-4"></i>
                                     <div>
-                                        <h4>Mail Us</h4>
-                                        <p class="mb-2">info@example.com</p>
+                                        <h4>Email</h4>
+                                        <p class="mb-2">hongnhan474747@gmail.com</p>
                                     </div>
                                 </div>
                                 <div class="d-flex p-4 rounded bg-white">
                                     <i class="fa fa-phone-alt fa-2x text-primary me-4"></i>
                                     <div>
-                                        <h4>Telephone</h4>
-                                        <p class="mb-2">(+012) 3456 7890</p>
+                                        <h4>Phone</h4>
+                                        <p class="mb-2">(+84) 979 886 834</p>
                                     </div>
                                 </div>
                             </div>
@@ -160,3 +161,5 @@
         </body>
 
         </html>
+
+

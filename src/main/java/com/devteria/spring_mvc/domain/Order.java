@@ -1,5 +1,6 @@
 package com.devteria.spring_mvc.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -10,6 +11,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "orders")
@@ -23,6 +26,10 @@ public class Order {
     private String receiverNote;
     private String status;
     private double totalPrice;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -100,6 +107,14 @@ public class Order {
 
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
 }
