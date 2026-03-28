@@ -7,6 +7,7 @@ import com.devteria.spring_mvc.repository.OrderDetailRepository;
 import com.devteria.spring_mvc.repository.OrderRepository;
 import com.devteria.spring_mvc.repository.ProductRepository;
 import com.devteria.spring_mvc.repository.UserRepository;
+import com.devteria.spring_mvc.service.specification.ProductSpecs;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -17,6 +18,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.devteria.spring_mvc.domain.Cart;
@@ -24,6 +26,7 @@ import com.devteria.spring_mvc.domain.CartDetail;
 import com.devteria.spring_mvc.domain.Order;
 import com.devteria.spring_mvc.domain.OrderDetail;
 import com.devteria.spring_mvc.domain.Product;
+import com.devteria.spring_mvc.domain.Product_;
 import com.devteria.spring_mvc.domain.User;
 
 @Service
@@ -49,10 +52,6 @@ public class ProductService {
 
     public Product save(Product product) {
         return this.productRepository.save(product);
-    }
-
-    public Page<Product> fetchProducts(Pageable page) {
-        return this.productRepository.findAll(page);
     }
 
     public Product updateProduct(Product product) {
@@ -232,5 +231,13 @@ public class ProductService {
             }
 
         }
+    }
+
+    public Page<Product> fetchProducts(Pageable page) {
+        return this.productRepository.findAll(page);
+    }
+
+    public Page<Product> fetchProductsWithSpec(String name, Pageable page) {
+        return this.productRepository.findAll(ProductSpecs.nameLike(name), page);
     }
 }

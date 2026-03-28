@@ -2,9 +2,13 @@ package com.devteria.spring_mvc.controller.client;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.annotations.GeneratorType;
 import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,7 +57,7 @@ public class ItemController {
         if (referer != null && referer.contains("/client/products")) {
             return "redirect:/client/products";
         }
-        
+
         return "redirect:/";
     }
 
@@ -138,4 +142,29 @@ public class ItemController {
         return "redirect:/client/product/" + id;
     }
 
+    @GetMapping("/client/products")
+    public String getProducts(Model model,
+            @RequestParam("page") Optional<String> pageOptional,
+            @RequestParam("name") Optional<String> nameOptional) {
+        int page = 1;
+
+        try {
+            if (pageOptional.isPresent()) {
+                page = Integer.parseInt(pageOptional.get());
+            } else {
+                page = 1;
+            }
+        } catch (Exception e) {
+
+        }
+        String name = nameOptional.isPresent() ? nameOptional.get() : "";
+        Pageable pageable = PageRequest.of(page - 1, 60); // CTRL clink of để xem chi tiết hàm of
+        Page<Product> prs = this.productService.fetchProductsWithSpec(name, pageable);
+        List<Product> listProducts = prs.getContent();
+        model.addAttribute("products", listProducts);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", prs.getTotalPages());
+        return "client/product/show";
+
+    }
 }
