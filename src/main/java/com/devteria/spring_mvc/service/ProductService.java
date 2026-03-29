@@ -252,8 +252,7 @@ public class ProductService {
             combinedSpec = combinedSpec.and(currentSpecs);
         }
         if (productCriteriaDTO.getPrice() != null && productCriteriaDTO.getPrice().isPresent()) {
-            Specification<Product> currentSpecs = this
-                    .buildPriceSpecification(productCriteriaDTO.getPrice().get());
+            Specification<Product> currentSpecs = this.buildPriceSpecification(productCriteriaDTO.getPrice().get());
             combinedSpec = combinedSpec.and(currentSpecs);
         }
         return this.productRepository.findAll(combinedSpec, page);

@@ -203,28 +203,28 @@
                                         <div class="col-6">
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input" id="price-1"
-                                                    name="price" value="0-500">
+                                                    name="price" value="0-to-500">
                                                 <label class="form-check-label" for="price-1">$0 - $500</label>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input" id="price-2"
-                                                    name="price" value="500-1000">
+                                                    name="price" value="500-to-1000">
                                                 <label class="form-check-label" for="price-2">$500 - $1K</label>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input" id="price-3"
-                                                    name="price" value="1000-1500">
+                                                    name="price" value="1000-to-1500">
                                                 <label class="form-check-label" for="price-3">$1K - $1.5K</label>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input" id="price-4"
-                                                    name="price" value="1500-3000">
+                                                    name="price" value="1500-to-3000">
                                                 <label class="form-check-label" for="price-4">$1.5K - $3K</label>
                                             </div>
                                         </div>
