@@ -16,96 +16,96 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class AccountController {
-	private final UserService userService;
-	private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
-	public AccountController(UserService userService, PasswordEncoder passwordEncoder) {
-		this.userService = userService;
-		this.passwordEncoder = passwordEncoder;
-	}
+    public AccountController(UserService userService, PasswordEncoder passwordEncoder) {
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
-	@GetMapping("/client/account")
-	public String getAccountPage(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("id") == null) {
-			return "redirect:/login";
-		}
+    @GetMapping("/client/account")
+    public String getAccountPage(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("id") == null) {
+            return "redirect:/login";
+        }
 
-		long userId = (long) session.getAttribute("id");
-		User user = this.userService.getUserById(userId);
-		model.addAttribute("user", user);
-		return "client/auth/account";
-	}
+        long userId = (long) session.getAttribute("id");
+        User user = this.userService.getUserById(userId);
+        model.addAttribute("user", user);
+        return "client/auth/account";
+    }
 
-	@GetMapping("/client/account/edit-info")
-	public String getEditProfilePage(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("id") == null) {
-			return "redirect:/login";
-		}
+    @GetMapping("/client/account/edit-info")
+    public String getEditProfilePage(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("id") == null) {
+            return "redirect:/login";
+        }
 
-		long userId = (long) session.getAttribute("id");
-		User user = this.userService.getUserById(userId);
-		model.addAttribute("newUser", user);
-		return "client/auth/edit-info";
-	}
+        long userId = (long) session.getAttribute("id");
+        User user = this.userService.getUserById(userId);
+        model.addAttribute("newUser", user);
+        return "client/auth/edit-info";
+    }
 
-	@PostMapping("/client/account/update-info")
-	public String updateProfileInfo(@ModelAttribute("newUser") User formUser, HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("id") == null) {
-			return "redirect:/login";
-		}
+    @PostMapping("/client/account/update-info")
+    public String updateProfileInfo(@ModelAttribute("newUser") User formUser, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("id") == null) {
+            return "redirect:/login";
+        }
 
-		long userId = (long) session.getAttribute("id");
-		User dbUser = this.userService.getUserById(userId);
+        long userId = (long) session.getAttribute("id");
+        User dbUser = this.userService.getUserById(userId);
 
-		dbUser.setFullName(formUser.getFullName());
-		dbUser.setPhoneNumber(formUser.getPhoneNumber());
-		dbUser.setAddress(formUser.getAddress());
+        dbUser.setFullName(formUser.getFullName());
+        dbUser.setPhoneNumber(formUser.getPhoneNumber());
+        dbUser.setAddress(formUser.getAddress());
 
-		this.userService.updatUser(dbUser);
+        this.userService.updatUser(dbUser);
 
-		session.setAttribute("fullName", dbUser.getFullName());
-		session.setAttribute("phone", dbUser.getPhoneNumber());
-		return "redirect:/client/account?success=true";
-	}
+        session.setAttribute("fullName", dbUser.getFullName());
+        session.setAttribute("phone", dbUser.getPhoneNumber());
+        return "redirect:/client/account?success=true";
+    }
 
-	@GetMapping("/client/account/change-password")
-	public String getChangePasswordPage(Model model) {
-		model.addAttribute("command", new User());
-		return "client/auth/change-password";
-	}
+    @GetMapping("/client/account/change-password")
+    public String getChangePasswordPage(Model model) {
+        model.addAttribute("command", new User());
+        return "client/auth/change-password";
+    }
 
-	@PostMapping("/client/account/update-password")
-	public String updatePassword(
-			@RequestParam("currentPassword") String currentPassword,
-			@RequestParam("newPassword") String newPassword,
-			@RequestParam("confirmPassword") String confirmPassword,
-			HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("id") == null) {
-			return "redirect:/login";
-		}
+    @PostMapping("/client/account/update-password")
+    public String updatePassword(
+            @RequestParam("currentPassword") String currentPassword,
+            @RequestParam("newPassword") String newPassword,
+            @RequestParam("confirmPassword") String confirmPassword,
+            HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("id") == null) {
+            return "redirect:/login";
+        }
 
-		long userId = (long) session.getAttribute("id");
-		User dbUser = this.userService.getUserById(userId);
+        long userId = (long) session.getAttribute("id");
+        User dbUser = this.userService.getUserById(userId);
 
-		if (!passwordEncoder.matches(currentPassword, dbUser.getPassword())) {
-			return "redirect:/client/account/change-password?error=invalidPassword";
-		}
+        if (!passwordEncoder.matches(currentPassword, dbUser.getPassword())) {
+            return "redirect:/client/account/change-password?error=invalidPassword";
+        }
 
-		if (!newPassword.equals(confirmPassword)) {
-			return "redirect:/client/account/change-password?error=passwordMismatch";
-		}
+        if (!newPassword.equals(confirmPassword)) {
+            return "redirect:/client/account/change-password?error=passwordMismatch";
+        }
 
-		if (newPassword.length() < 6) {
-			return "redirect:/client/account/change-password?error=passwordTooShort";
-		}
+        if (newPassword.length() < 6) {
+            return "redirect:/client/account/change-password?error=passwordTooShort";
+        }
 
-		dbUser.setPassword(passwordEncoder.encode(newPassword));
-		this.userService.updatUser(dbUser);
+        dbUser.setPassword(passwordEncoder.encode(newPassword));
+        this.userService.updatUser(dbUser);
 
-		return "redirect:/client/account?passwordSuccess=true";
-	}
+        return "redirect:/client/account?passwordSuccess=true";
+    }
 }
