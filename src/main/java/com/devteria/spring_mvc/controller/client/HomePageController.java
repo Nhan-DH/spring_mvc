@@ -104,10 +104,10 @@ public class HomePageController {
         return "client/contact";
     }
 
-    @GetMapping("/client/account")
-    public String getAccount() {
+    // @GetMapping("/client/account")
+    // public String getAccount() {
 
-        return "client/auth/account";
-    }
+    // return "client/auth/account";
+    // }
 
 }
