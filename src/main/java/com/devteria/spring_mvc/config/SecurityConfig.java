@@ -44,7 +44,9 @@ public class SecurityConfig {
                 // .authorizeHttpRequests(authz -> authz.anyRequest().permitAll())
                 .authorizeHttpRequests(authz -> authz
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.INCLUDE).permitAll()
-                        .requestMatchers("/", "/login", "/product/**", "/client/**", "/css/**", "/js/**", "/images/**")
+                        .requestMatchers("/", "/login", "/register", "/contact", "/product/**", "/client/**", "/css/**",
+                                "/js/**",
+                                "/images/**")
                         .permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())

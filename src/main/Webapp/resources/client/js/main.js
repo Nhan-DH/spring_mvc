@@ -186,5 +186,88 @@
         }
     });
 
+
+    function restoreFilterStateFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+
+        const factoryValues = (params.get('factory') || '').split(',').filter(Boolean);
+        const targetValues = (params.get('target') || '').split(',').filter(Boolean);
+        const priceValues = (params.get('price') || '').split(',').filter(Boolean);
+        const sortValue = params.get('sort') || 'nothing';
+
+        $('#factoryFilter input[type="checkbox"]').each(function () {
+            $(this).prop('checked', factoryValues.includes($(this).val()));
+        });
+
+        $('#targetFilter input[type="checkbox"]').each(function () {
+            $(this).prop('checked', targetValues.includes($(this).val()));
+        });
+
+        $('#priceFilter input[type="checkbox"]').each(function () {
+            $(this).prop('checked', priceValues.includes($(this).val()));
+        });
+
+        $('input[name="sort"]').prop('checked', false);
+        $('input[name="sort"][value="' + sortValue + '"]').prop('checked', true);
+    }
+
+    restoreFilterStateFromUrl();
+
+    // handle filter button click
+    $('#btnFilter').click(function (event) {
+        event.preventDefault();
+        // Filter logic would go here
+        let factoryArr = [];
+        let targetArr = [];
+        let priceArr = [];
+
+        //factorty filter
+        $('#factoryFilter input[type="checkbox"]:checked').each(function () {
+            factoryArr.push($(this).val());
+        });
+        //target filter
+        $('#targetFilter input[type="checkbox"]:checked').each(function () {
+            targetArr.push($(this).val());
+        }
+        );
+        //price filter
+        $('#priceFilter input[type="checkbox"]:checked').each(function () {
+            priceArr.push($(this).val());
+        });
+
+
+        //sort order 
+        let sortValue = $('input[name="sort"]:checked').val();
+
+        const urlCurrent = new URL(window.location.href);
+        const searchParams = urlCurrent.searchParams;
+
+        //add orr update query paramaeters
+        searchParams.set('page', '1');
+        searchParams.set('sort', sortValue);
+        if (factoryArr.length > 0) {
+            searchParams.set('factory', factoryArr.join(','));
+        } else {
+            searchParams.delete('factory');
+        }
+
+        if (targetArr.length > 0) {
+            searchParams.set('target', targetArr.join(','));
+        } else {
+            searchParams.delete('target');
+        }
+        if (priceArr.length > 0) {
+            searchParams.set('price', priceArr.join(','));
+        } else {
+            searchParams.delete('price');
+        }
+
+        //upfate url
+        window.location.href = urlCurrent.toString();
+        //logic khi an filter button thi casc check box van giu nguyen trang thai checked hay unchecked
+
+    });
+
+
 })(jQuery);
 

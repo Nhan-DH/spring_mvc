@@ -5,7 +5,8 @@
         <html lang="en">
 
         <head>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2220%22%20fill%3D%22%230A0A0A%22/%3E%3Cpath%20d%3D%22M%2020%2020%20h%2030%20a%2030%2030%200%200%201%2030%2030%20a%2030%2030%200%200%201%20-30%2030%20h%20-30%20v%20-60%20z%20M%2032%2032%20v%2036%20h%2018%20a%2018%2018%200%200%200%2018%20-18%20a%2018%2018%200%200%200%20-18%20-18%20h%20-18%20z%22%20fill%3D%22%232d2d2d%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%228%22%20fill%3D%22%230066FF%22/%3E%3C/svg%3E" />
+            <link rel="icon" type="image/svg+xml"
+                href="data:image/svg+xml,%3Csvg%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2220%22%20fill%3D%22%230A0A0A%22/%3E%3Cpath%20d%3D%22M%2020%2020%20h%2030%20a%2030%2030%200%200%201%2030%2030%20a%2030%2030%200%200%201%20-30%2030%20h%20-30%20v%20-60%20z%20M%2032%2032%20v%2036%20h%2018%20a%2018%2018%200%200%200%2018%20-18%20a%2018%2018%200%200%200%20-18%20-18%20h%20-18%20z%22%20fill%3D%22%232d2d2d%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%228%22%20fill%3D%22%230066FF%22/%3E%3C/svg%3E" />
             <meta charset="utf-8">
             <title>NYAN SHOP</title>
             <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -98,7 +99,7 @@
                                 <h4 class="mb-4"><strong>Filters</strong></h4>
 
                                 <!-- Brands Filter -->
-                                <div class="mb-4">
+                                <div class="mb-4" id="factoryFilter">
                                     <h5 class="mb-3"><i class="fas fa-laptop me-2" style="color: #0066ff;"></i>Brands
                                     </h5>
                                     <div class="row g-2">
@@ -150,7 +151,7 @@
                                 <hr>
 
                                 <!-- Purpose Filter -->
-                                <div class="mb-4">
+                                <div class="mb-4" id="targetFilter">
                                     <h5 class="mb-3"><i class="fas fa-bullseye me-2" style="color: #0066ff;"></i>Purpose
                                     </h5>
                                     <div class="row g-2">
@@ -195,7 +196,7 @@
                                 <hr>
 
                                 <!-- Price Filter -->
-                                <div class="mb-4">
+                                <div class="mb-4" id="priceFilter">
                                     <h5 class="mb-3"><i class="fas fa-dollar-sign me-2"
                                             style="color: #0066ff;"></i>Price Range</h5>
                                     <div class="row g-2">
@@ -233,7 +234,7 @@
                                 <hr>
 
                                 <!-- Sort Filter -->
-                                <div class="mb-4">
+                                <div class="mb-4" id="sortFilter">
                                     <h5 class="mb-3"><i class="fas fa-sort-amount-down me-2"
                                             style="color: #0066ff;"></i>Sort by Price</h5>
                                     <div class="row g-2">
@@ -251,13 +252,20 @@
                                                 <label class="form-check-label" for="sort-desc">High to Low</label>
                                             </div>
                                         </div>
+                                        <div class="col-6">
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" id="sort-nothing"
+                                                    name="sort" checked value="nothing">
+                                                <label class="form-check-label" for="sort-nothing">Unsorted</label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <hr>
 
                                 <!-- Filter Button -->
-                                <button type="button" class="btn btn-primary w-100"
+                                <button id="btnFilter" type="button" class="btn btn-primary w-100"
                                     style="background: linear-gradient(135deg, #0066ff 0%, #0052cc 100%); border: none; padding: 12px; font-weight: 600; border-radius: 8px;">
                                     <i class="fas fa-filter me-2"></i>Filter Products
                                 </button>
@@ -270,20 +278,22 @@
                                 <div class="col-12">
                                     <div class="pagination d-flex justify-content-center mt-5">
                                         <a class="${1 == currentPage ? 'page-link disabled' : 'page-link'}"
-                                            href="/client/products?page=${currentPage - 1}" aria-label="Previous">
+                                            href="/client/products?page=${currentPage - 1}${queryString}"
+                                            aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                             <span class="sr-only">Previous</span>
                                         </a>
                                         <c:forEach begin="1" end="${totalPages}" var="loop">
                                             <li class="page-item">
                                                 <a class="${loop == currentPage ? 'page-link active' : 'page-link'}"
-                                                    href="/client/products?page=${loop}">
+                                                    href="/client/products?page=${loop}${queryString}">
                                                     ${loop}
                                                 </a>
                                             </li>
                                         </c:forEach>
                                         <a class="${totalPages == currentPage ? 'page-link disabled' : 'page-link'}"
-                                            href="/client/products?page=${currentPage + 1}" aria-label="Next">
+                                            href="/client/products?page=${currentPage + 1}${queryString}"
+                                            aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                             <span class="sr-only">Next</span>
                                         </a>
@@ -321,5 +331,3 @@
         </body>
 
         </html>
-
-
