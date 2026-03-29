@@ -11,6 +11,8 @@
             <meta content="width=device-width, initial-scale=1.0" name="viewport">
             <meta content="" name="keywords">
             <meta content="" name="description">
+            <meta name="_csrf" content="${_csrf.token}">
+            <meta name="_csrf_header" content="${_csrf.headerName}">
 
             <!-- Google Web Fonts -->
             <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,7 +86,7 @@
                                 </ol>
                             </nav>
                         </div>
-                        <div class="col-lg-8 col-xl-9">
+                        <div class="col-12">
                             <div class="row g-4">
                                 <div class="col-lg-6">
                                     <div class="border rounded">
@@ -208,104 +210,85 @@
                                     </div>
                                     <!-- detail product end -->
                                 </div>
-                                <!-- comment start -->
-                                <form action="#">
-                                    <h4 class="mb-5 fw-bold">Leave a Reply</h4>
-                                    <div class="row g-4">
-                                        <div class="col-lg-6">
-                                            <div class="border-bottom rounded">
-                                                <input type="text" class="form-control border-0 me-4"
-                                                    placeholder="Yur Name *">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="border-bottom rounded">
-                                                <input type="email" class="form-control border-0"
-                                                    placeholder="Your Email *">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="border-bottom rounded my-4">
-                                                <textarea name="" id="" class="form-control border-0" cols="30" rows="8"
-                                                    placeholder="Your Review *" spellcheck="false"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="d-flex justify-content-between py-3 mb-5">
-                                                <div class="d-flex align-items-center">
-                                                    <p class="mb-0 me-3">Please rate:</p>
-                                                    <div class="d-flex align-items-center" style="font-size: 12px;">
-                                                        <i class="fa fa-star text-muted"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </div>
-                                                <a href="#"
-                                                    class="btn border border-secondary text-primary rounded-pill px-4 py-3">
-                                                    Post Comment</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <!-- comment end -->
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-xl-3">
-                            <div class="row g-4 fruite">
-                                <div class="col-lg-12">
-                                    <div class="input-group w-100 mx-auto d-flex mb-4">
-                                        <input type="search" class="form-control p-3" placeholder="keywords"
-                                            aria-describedby="search-icon-1">
-                                        <span id="search-icon-1" class="input-group-text p-3"><i
-                                                class="fa fa-search"></i></span>
-                                    </div>
-                                    <div class="mb-4">
-                                        <h4>Categories</h4>
-                                        <ul class="list-unstyled fruite-categorie">
-                                            <li>
-                                                <div class="d-flex justify-content-between fruite-name">
-                                                    <a href="#"><i class="fas fa-apple-alt me-2"></i>Apples</a>
-                                                    <span>(3)</span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="d-flex justify-content-between fruite-name">
-                                                    <a href="#"><i class="fas fa-apple-alt me-2"></i>Oranges</a>
-                                                    <span>(5)</span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="d-flex justify-content-between fruite-name">
-                                                    <a href="#"><i class="fas fa-apple-alt me-2"></i>Strawbery</a>
-                                                    <span>(2)</span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="d-flex justify-content-between fruite-name">
-                                                    <a href="#"><i class="fas fa-apple-alt me-2"></i>Banana</a>
-                                                    <span>(8)</span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="d-flex justify-content-between fruite-name">
-                                                    <a href="#"><i class="fas fa-apple-alt me-2"></i>Pumpkin</a>
-                                                    <span>(5)</span>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-
                             </div>
                         </div>
                     </div>
 
                     <!-- Related products start -->
-                    <h1 class="fw-bold mb-0">Related products</h1>
-                    <h1>developing....</h1>
+                    <h1 class="fw-bold mb-4">Related products</h1>
+                    <c:if test="${empty relatedProducts}">
+                        <p class="text-muted mb-0">No related products found.</p>
+                    </c:if>
+                    <c:if test="${not empty relatedProducts}">
+                        <div class="vesitable">
+                            <div class="owl-carousel vegetable-carousel justify-content-center">
+                                <c:forEach var="rp" items="${relatedProducts}">
+                                    <div class="border border-primary rounded position-relative vesitable-item">
+                                        <div class="vesitable-img">
+                                            <a href="/client/product/${rp.id}">
+                                                <img src="/images/image/${rp.image}" class="img-fluid w-100 rounded-top"
+                                                    alt="${rp.name}">
+                                            </a>
+                                        </div>
+                                        <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
+                                            style="top: 10px; right: 10px;">${rp.factory}</div>
+                                        <div class="p-4 pb-0 rounded-bottom">
+                                            <h4>${rp.name}</h4>
+                                            <p>${rp.shortDesc}</p>
+                                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                                <p class="text-dark fs-5 fw-bold">$${rp.price}</p>
+                                                <button type="button" data-product-id="${rp.id}"
+                                                    class="btnAddToCart btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary">
+                                                    <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </c:if>
+
+                    <!-- comment start -->
+                    <form action="#" class="mt-5">
+                        <h4 class="mb-5 fw-bold">Leave a Reply</h4>
+                        <div class="row g-4">
+                            <div class="col-lg-6">
+                                <div class="border-bottom rounded">
+                                    <input type="text" class="form-control border-0 me-4" placeholder="Yur Name *">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="border-bottom rounded">
+                                    <input type="email" class="form-control border-0" placeholder="Your Email *">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="border-bottom rounded my-4">
+                                    <textarea name="" id="" class="form-control border-0" cols="30" rows="8"
+                                        placeholder="Your Review *" spellcheck="false"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="d-flex justify-content-between py-3 mb-5">
+                                    <div class="d-flex align-items-center">
+                                        <p class="mb-0 me-3">Please rate:</p>
+                                        <div class="d-flex align-items-center" style="font-size: 12px;">
+                                            <i class="fa fa-star text-muted"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="btn border border-secondary text-primary rounded-pill px-4 py-3">
+                                        Post Comment</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- comment end -->
+
                     <!-- <div class="vesitable">
                         <div class="owl-carousel vegetable-carousel justify-content-center">
                             <div class="border border-primary rounded position-relative vesitable-item">

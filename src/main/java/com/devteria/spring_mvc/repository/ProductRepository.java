@@ -1,5 +1,7 @@
 package com.devteria.spring_mvc.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -19,4 +21,6 @@ public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpec
     Page<Product> findAll(Pageable pageable);
 
     Page<Product> findAll(Specification<Product> spec, Pageable pageable);
+
+    List<Product> findByFactoryAndIdNot(String factory, long id, Pageable pageable);
 }

@@ -44,7 +44,9 @@ public class ItemController {
     @GetMapping("/client/product/{id}")
     public String getProductPage(Model model, @PathVariable long id) {
         Product product = this.productService.findProduct(id);
+        List<Product> relatedProducts = this.productService.getRelatedProducts(product, 8);
         model.addAttribute("product", product);
+        model.addAttribute("relatedProducts", relatedProducts);
         model.addAttribute("id", id);
         return "client/product/detail";
     }

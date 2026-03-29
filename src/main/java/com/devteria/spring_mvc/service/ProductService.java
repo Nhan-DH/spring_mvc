@@ -13,11 +13,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import java.util.Date;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.boot.autoconfigure.rsocket.RSocketProperties.Server.Spec;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -70,6 +72,16 @@ public class ProductService {
 
     public Product findProduct(long id) {
         return this.productRepository.findById(id);
+    }
+
+    public List<Product> getRelatedProducts(Product product, int limit) {
+        if (product == null || product.getFactory() == null || product.getFactory().isBlank()) {
+            return Collections.emptyList();
+        }
+        return this.productRepository.findByFactoryAndIdNot(
+                product.getFactory(),
+                product.getId(),
+                PageRequest.of(0, limit));
     }
 
     public void handleAddProductToCart(String email, long id, HttpSession session) {
