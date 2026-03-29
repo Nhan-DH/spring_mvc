@@ -33,15 +33,17 @@
                                     class="nav-item nav-link ${fn:startsWith(currentUrl, '/client/products') ? 'active' : ''}">
                                     All Products
                                 </a>
-                                <a href="/client/my-orders"
-                                    class="nav-item nav-link ${fn:startsWith(currentUrl, '/client/my-orders') ? 'active' : ''}">
-                                    Orders
-                                </a>
+                                <c:if test="${pageContext.request.userPrincipal != null}">
+                                    <a href="/client/my-orders"
+                                        class="nav-item nav-link ${fn:startsWith(currentUrl, '/client/my-orders') ? 'active' : ''}">
+                                        Orders
+                                    </a>
 
-                                <a href="/client/account"
-                                    class="nav-item nav-link ${fn:startsWith(currentUrl, '/client/account') ? 'active' : ''}">
-                                    Account
-                                </a>
+                                    <a href="/client/account"
+                                        class="nav-item nav-link ${fn:startsWith(currentUrl, '/client/account') ? 'active' : ''}">
+                                        Account
+                                    </a>
+                                </c:if>
 
                                 <a href="/contact"
                                     class="nav-item nav-link ${fn:startsWith(currentUrl, '/client/contact') ? 'active' : ''}">
@@ -104,7 +106,7 @@
                                 <c:if test="${empty pageContext.request.userPrincipal}">
                                     <a href="/login" class="position-realative me-4 my-auto"
                                         style="background-color: rgb(11, 126, 241); color: white; padding: 5px 10px; border-radius: 10%;">
-                                        Login
+                                        Login to buy
                                     </a>
                                 </c:if>
                             </div>
