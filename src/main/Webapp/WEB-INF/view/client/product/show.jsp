@@ -35,6 +35,10 @@
             <!-- Template Stylesheet -->
             <link href="/client/css/style.css" rel="stylesheet">
 
+            <meta name="_csrf" content="${_csrf.token}" />
+            <meta name="_csrf_header" content="${_csrf.headerName}" />
+            <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css" />
             <!-- Pagination Disabled Fix -->
             <style>
                 .page-link.disabled {
@@ -325,7 +329,7 @@
             <script src="/client/lib/waypoints/waypoints.min.js"></script>
             <script src="/client/lib/lightbox/js/lightbox.min.js"></script>
             <script src="/client/lib/owlcarousel/owl.carousel.min.js"></script>
-
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
             <!-- Template Javascript -->
             <script src="/client/js/main.js"></script>
         </body>

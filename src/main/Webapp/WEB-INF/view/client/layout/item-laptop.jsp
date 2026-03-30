@@ -136,14 +136,14 @@
                                             $${product.price}
                                         </div>
 
-                                        <form action="/add-product-to-cart/${product.id}" method="post" class="mt-auto">
-                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                            <button type="submit"
-                                                class="btn border border-secondary text-primary w-100 add-cart-btn">
-                                                <i class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                Add to cart
-                                            </button>
-                                        </form>
+                                        <!-- <form action="/add-product-to-cart/${product.id}" method="post" class="mt-auto">
+                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> -->
+                                        <button data-product-id="${product.id}"
+                                            class="btnAddToCartHomepage btn border border-secondary text-primary w-100 add-cart-btn">
+                                            <i class="fa fa-shopping-bag me-2 text-primary"></i>
+                                            Add to cart
+                                        </button>
+                                        <!-- </form> -->
                                     </div>
 
                                 </div>

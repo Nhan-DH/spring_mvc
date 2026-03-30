@@ -58,7 +58,8 @@
                                         <i class="fa fa-shopping-bag fa-2x"></i>
                                         <span
                                             class="position-absolute rounded-circle d-flex align-items-center justify-content-center text-white px-1"
-                                            style="top:-5px; left:15px; height:20px; min-width:20px; background:#0066ff;">
+                                            style="top:-5px; left:15px; height:20px; min-width:20px; background:#0066ff;"
+                                            id="sumCart">
                                             ${sessionScope.sum}
                                         </span>
                                     </a>
@@ -104,7 +105,7 @@
                                 </c:if>
 
                                 <c:if test="${empty pageContext.request.userPrincipal}">
-                                    <a href="/login" class="position-realative me-4 my-auto"
+                                    <a href="/login" class="a-login position-realative me-4 my-auto"
                                         style="background-color: rgb(11, 126, 241); color: white; padding: 5px 10px; border-radius: 10%;">
                                         Login to buy
                                     </a>

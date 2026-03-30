@@ -190,7 +190,57 @@
             });
         }
     });
+    //////////////////handle add to cart button on homepage
+    function isLogin() {
+        const navElements = $("#navbarCollapse");
+        const childLogin = navElements.find('a.a-login');
+        if (childLogin.length > 0) {
+            return false;
+        }
+        return true;
+    }
 
+    $('.btnAddToCartHomepage').click(function (event) {
+        event.preventDefault();
+        if (!isLogin()) {
+            $.toast({
+                heading: 'Error',
+                text: 'You need to login to add products to cart.',
+                position: 'top-right',
+                icon: 'error'
+            });
+            return;
+        }
+        const productId = $(this).attr('data-product-id');
+        const token = $("meta[name='_csrf']").attr("content");
+        const header = $("meta[name='_csrf_header']").attr("content");
+        const quantity = $("#cartDetails0\\.quantity").val() || 1; // default quantity is 1
+
+        $.ajax({
+            url: `${window.location.origin}/api/add-product-to-cart`,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(header, token);
+            }
+            , type: 'POST'
+            , data: JSON.stringify({
+                productId: productId,
+                quantity: quantity
+            })
+            , contentType: 'application/json'
+            , success: function (response) {
+                const sum = +response;
+                //update cart
+                $("#sumCart").text(sum);
+                $.toast({
+                    heading: 'Success',
+                    text: 'Product added to cart successfully.',
+                    position: 'top-right',
+                    icon: 'success'
+                });
+
+            }
+        });
+    });
 
     function restoreFilterStateFromUrl() {
         const params = new URLSearchParams(window.location.search);
