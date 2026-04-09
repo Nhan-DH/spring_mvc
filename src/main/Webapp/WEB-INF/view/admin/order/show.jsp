@@ -87,13 +87,13 @@
                     <jsp:include page="../layout/sidebar.jsp" />
                     <div id="layoutSidenav_content">
                         <main>
-                            <div class="ms-5">
+                            <!-- <div class="ms-5">
                                 <h1><i class="fas fa-shopping-bag"></i> Order Management</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
                                     <li class="breadcrumb-item active">Orders</li>
                                 </ol>
-                            </div>
+                            </div> -->
                             <div class="container-fluid mt-4">
                                 <div class="row">
                                     <div class="col-12">

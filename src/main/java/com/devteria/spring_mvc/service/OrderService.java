@@ -1,5 +1,7 @@
 package com.devteria.spring_mvc.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -56,6 +58,21 @@ public class OrderService {
     // lấy user theo date
     public List<Order> getOrdersByUserId(long userId) {
         return this.orderRepository.findByUserIdOrderByCreatedDateDescIdDesc(userId);
+    }
+
+    public List<Double> getRevenueByMonth(int year) {
+        List<Double> monthlyRevenue = new ArrayList<>(Collections.nCopies(12, 0.0));
+        List<Object[]> rows = this.orderRepository.getMonthlyRevenueByYear(year);
+
+        for (Object[] row : rows) {
+            int month = ((Number) row[0]).intValue();
+            double total = ((Number) row[1]).doubleValue();
+            if (month >= 1 && month <= 12) {
+                monthlyRevenue.set(month - 1, total);
+            }
+        }
+
+        return monthlyRevenue;
     }
 
 }
