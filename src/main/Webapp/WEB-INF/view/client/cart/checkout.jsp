@@ -138,6 +138,12 @@
                                 <form:form action="/place-order" method="post" modelAttribute="cart" class="row g-4">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
+                                    <c:if test="${not empty checkoutError}">
+                                        <div class="col-12">
+                                            <div class="alert alert-danger mb-0">${checkoutError}</div>
+                                        </div>
+                                    </c:if>
+
 
                                     <!-- Receiver info -->
                                     <div class="col-12 col-lg-7">
@@ -148,13 +154,15 @@
                                                 <div class="col-12 col-md-6">
                                                     <label class="form-label">Full Name</label>
                                                     <input type="text" name="receiverName" class="form-control"
-                                                        placeholder="Enter full name">
+                                                        placeholder="Enter full name" value="${receiverName}" required>
                                                 </div>
 
                                                 <div class="col-12 col-md-6">
                                                     <label class="form-label">Phone Number</label>
-                                                    <input type="text" name="receiverPhone" class="form-control"
-                                                        placeholder="Enter phone number">
+                                                    <input type="tel" name="receiverPhone" class="form-control"
+                                                        placeholder="Enter phone number" value="${receiverPhone}" required
+                                                        pattern="[0-9]{9,11}" maxlength="11" inputmode="numeric"
+                                                        title="Phone number must contain only digits (9-11 digits)">
                                                 </div>
 
 
@@ -162,13 +170,13 @@
                                                 <div class="col-12">
                                                     <label class="form-label">Address</label>
                                                     <input type="text" name="receiverAddress" class="form-control"
-                                                        placeholder="Enter address">
+                                                        placeholder="Enter address" value="${receiverAddress}" required>
                                                 </div>
 
                                                 <div class="col-12">
                                                     <label class="form-label">Note</label>
                                                     <textarea name="receiverNote" rows="4" class="form-control"
-                                                        placeholder="Enter note for delivery"></textarea>
+                                                        placeholder="Enter note for delivery">${receiverNote}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -210,7 +218,7 @@
                                                 <button
                                                     class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase w-100"
                                                     type="submit">
-                                                    Place Order
+                                                    Continue To Confirmation
                                                 </button>
                                                 <a href="/cart"
                                                     class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase w-100 mt-3">

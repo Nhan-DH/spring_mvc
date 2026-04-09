@@ -32,10 +32,14 @@ import jakarta.websocket.server.PathParam;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.util.StringUtils;
+import java.util.regex.Pattern;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ItemController {
     private final ProductService productService;
+    private static final Pattern PHONE_PATTERN = Pattern.compile("^[0-9]{9,11}$");
 
     public ItemController(ProductService productService) {
         this.productService = productService;
@@ -86,7 +90,12 @@ public class ItemController {
     }
 
     @GetMapping("/confirm-checkout")
-    public String getCheckout(Model model, HttpServletRequest request) {
+    public String getCheckout(Model model, HttpServletRequest request,
+            @RequestParam(value = "receiverName", required = false) String receiverName,
+            @RequestParam(value = "receiverPhone", required = false) String receiverPhone,
+            @RequestParam(value = "receiverAddress", required = false) String receiverAddress,
+            @RequestParam(value = "receiverNote", required = false) String receiverNote,
+            @RequestParam(value = "checkoutError", required = false) String checkoutError) {
         User curUser = new User();
         HttpSession session = request.getSession(false);
         long id = (long) session.getAttribute("id");
@@ -97,6 +106,11 @@ public class ItemController {
         for (CartDetail cd : cartDetails) {
             total += cd.getPrice() * cd.getQuantity();
         }
+        model.addAttribute("receiverName", receiverName == null ? "" : receiverName);
+        model.addAttribute("receiverPhone", receiverPhone == null ? "" : receiverPhone);
+        model.addAttribute("receiverAddress", receiverAddress == null ? "" : receiverAddress);
+        model.addAttribute("receiverNote", receiverNote == null ? "" : receiverNote);
+        model.addAttribute("checkoutError", checkoutError == null ? "" : checkoutError);
         model.addAttribute("cartDetails", cartDetails);
         model.addAttribute("total", total);
         model.addAttribute("cart", cart);
@@ -124,17 +138,106 @@ public class ItemController {
             @RequestParam("receiverName") String receiveName,
             @RequestParam("receiverPhone") String receiverPhone,
             @RequestParam("receiverAddress") String receiverAddress,
-            @RequestParam("receiverNote") String receiverNote
+            @RequestParam("receiverNote") String receiverNote,
+            Model model
 
     ) {
+        User curUser = new User();
+        HttpSession session = request.getSession(false);
+        long id = (long) session.getAttribute("id");
+        curUser.setId(id);
+
+        String safeReceiveName = receiveName == null ? "" : receiveName.trim();
+        String safeReceivePhone = receiverPhone == null ? "" : receiverPhone.trim();
+        String safeReceiveAddress = receiverAddress == null ? "" : receiverAddress.trim();
+        String safeReceiverNote = receiverNote == null ? "" : receiverNote.trim();
+
+        Cart cart = this.productService.getCartByUser(curUser);
+        List<CartDetail> cartDetails = cart == null ? new ArrayList<CartDetail>() : cart.getCartDetails();
+        double total = 0;
+        for (CartDetail cd : cartDetails) {
+            total += cd.getPrice() * cd.getQuantity();
+        }
+
+        if (cartDetails.isEmpty()) {
+            return "redirect:/cart";
+        }
+
+        if (!StringUtils.hasText(safeReceiveName)
+                || !StringUtils.hasText(safeReceivePhone)
+                || !StringUtils.hasText(safeReceiveAddress)) {
+            model.addAttribute("checkoutError", "Please fill in all required receiver information.");
+            model.addAttribute("receiverName", safeReceiveName);
+            model.addAttribute("receiverPhone", safeReceivePhone);
+            model.addAttribute("receiverAddress", safeReceiveAddress);
+            model.addAttribute("receiverNote", safeReceiverNote);
+            model.addAttribute("cartDetails", cartDetails);
+            model.addAttribute("total", total);
+            model.addAttribute("cart", cart);
+            return "client/cart/checkout";
+        }
+
+        if (!PHONE_PATTERN.matcher(safeReceivePhone).matches()) {
+            model.addAttribute("checkoutError", "Phone number must contain only digits (9-11 digits).");
+            model.addAttribute("receiverName", safeReceiveName);
+            model.addAttribute("receiverPhone", safeReceivePhone);
+            model.addAttribute("receiverAddress", safeReceiveAddress);
+            model.addAttribute("receiverNote", safeReceiverNote);
+            model.addAttribute("cartDetails", cartDetails);
+            model.addAttribute("total", total);
+            model.addAttribute("cart", cart);
+            return "client/cart/checkout";
+        }
+
+        model.addAttribute("receiverName", safeReceiveName);
+        model.addAttribute("receiverPhone", safeReceivePhone);
+        model.addAttribute("receiverAddress", safeReceiveAddress);
+        model.addAttribute("receiverNote", safeReceiverNote);
+        model.addAttribute("cartDetails", cartDetails);
+        model.addAttribute("total", total);
+        model.addAttribute("cart", cart);
+        return "client/cart/confirm-order";
+    }
+
+    @PostMapping("/place-order/confirm")
+    public String confirmPlaceOrder(HttpServletRequest request,
+            @RequestParam("receiverName") String receiveName,
+            @RequestParam("receiverPhone") String receiverPhone,
+            @RequestParam("receiverAddress") String receiverAddress,
+            @RequestParam("receiverNote") String receiverNote,
+            RedirectAttributes redirectAttributes) {
 
         User curUser = new User();
         HttpSession session = request.getSession(false);
         long id = (long) session.getAttribute("id");
         curUser.setId(id);
 
-        this.productService.handlePlaceOrder(curUser, session, receiveName, receiverPhone, receiverAddress,
-                receiverNote);
+        String safeReceiveName = receiveName == null ? "" : receiveName.trim();
+        String safeReceivePhone = receiverPhone == null ? "" : receiverPhone.trim();
+        String safeReceiveAddress = receiverAddress == null ? "" : receiverAddress.trim();
+        String safeReceiverNote = receiverNote == null ? "" : receiverNote.trim();
+
+        if (!StringUtils.hasText(safeReceiveName)
+                || !StringUtils.hasText(safeReceivePhone)
+                || !StringUtils.hasText(safeReceiveAddress)) {
+            redirectAttributes.addAttribute("receiverName", safeReceiveName);
+            redirectAttributes.addAttribute("receiverPhone", safeReceivePhone);
+            redirectAttributes.addAttribute("receiverAddress", safeReceiveAddress);
+            redirectAttributes.addAttribute("receiverNote", safeReceiverNote);
+            return "redirect:/confirm-checkout";
+        }
+
+        if (!PHONE_PATTERN.matcher(safeReceivePhone).matches()) {
+            redirectAttributes.addAttribute("receiverName", safeReceiveName);
+            redirectAttributes.addAttribute("receiverPhone", safeReceivePhone);
+            redirectAttributes.addAttribute("receiverAddress", safeReceiveAddress);
+            redirectAttributes.addAttribute("receiverNote", safeReceiverNote);
+            redirectAttributes.addAttribute("checkoutError", "Phone number must contain only digits (9-11 digits).");
+            return "redirect:/confirm-checkout";
+        }
+
+        this.productService.handlePlaceOrder(curUser, session, safeReceiveName, safeReceivePhone, safeReceiveAddress,
+                safeReceiverNote);
         return "client/cart/thanks";
     }
 
