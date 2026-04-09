@@ -86,7 +86,7 @@
                                             </li>
 
                                             <li>
-                                                <a class="dropdown-item" href="#">Change Password</a>
+                                                <a class="dropdown-item" href="/client/account">Account Settings</a>
                                             </li>
 
                                             <li>

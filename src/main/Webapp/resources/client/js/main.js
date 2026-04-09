@@ -23,34 +23,43 @@
     });
 
 
-    // Fixed Navbar
-    $(window).scroll(function () {
-        if ($(window).width() < 992) {
-            if ($(this).scrollTop() > 55) {
-                $('.fixed-top').addClass('shadow');
-            } else {
-                $('.fixed-top').removeClass('shadow');
-            }
-        } else {
-            if ($(this).scrollTop() > 55) {
-                $('.fixed-top').addClass('shadow').css('top', -0);
-            } else {
-                $('.fixed-top').removeClass('shadow').css('top', 0);
-            }
+    // Fixed Navbar + Back to top (single scroll listener to avoid scroll lag)
+    let scrollTicking = false;
+    let backToTopVisible = false;
+    $(window).on('scroll', function () {
+        if (scrollTicking) {
+            return;
         }
+        scrollTicking = true;
+        window.requestAnimationFrame(function () {
+            const scrollTop = $(window).scrollTop();
+
+            if ($(window).width() < 992) {
+                $('.fixed-top').toggleClass('shadow', scrollTop > 55);
+            } else {
+                $('.fixed-top').toggleClass('shadow', scrollTop > 55).css('top', 0);
+            }
+
+            const shouldShowBackToTop = scrollTop > 300;
+            if (shouldShowBackToTop !== backToTopVisible) {
+                backToTopVisible = shouldShowBackToTop;
+                if (shouldShowBackToTop) {
+                    $('.back-to-top').stop(true, true).fadeIn(120);
+                } else {
+                    $('.back-to-top').stop(true, true).fadeOut(120);
+                }
+            }
+
+            scrollTicking = false;
+        });
     });
 
-
-    // Back to top button
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 300) {
-            $('.back-to-top').fadeIn('slow');
+    $('.back-to-top').on('click', function () {
+        if ('scrollBehavior' in document.documentElement.style) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
-            $('.back-to-top').fadeOut('slow');
+            $('html, body').stop(true, true).animate({ scrollTop: 0 }, 350);
         }
-    });
-    $('.back-to-top').click(function () {
-        $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
         return false;
     });
 
@@ -321,6 +330,66 @@
         window.location.href = urlCurrent.toString();
         //logic khi an filter button thi casc check box van giu nguyen trang thai checked hay unchecked
 
+    });
+
+    // Homepage live search suggestions
+    const homepageSearchInput = $('#homepageSearchInput');
+    const homepageSearchSuggestions = $('#homepageSearchSuggestions');
+    let searchDebounceTimer = null;
+    let searchXhr = null;
+
+    function hideSuggestions() {
+        homepageSearchSuggestions.hide().empty();
+    }
+
+    function renderSuggestions(items) {
+        if (!items || items.length === 0) {
+            hideSuggestions();
+            return;
+        }
+
+        const html = items.map(function (item) {
+            return '<a href="/client/product/' + item.id
+                + '" class="list-group-item list-group-item-action">'
+                + item.name + '</a>';
+        }).join('');
+
+        homepageSearchSuggestions.html(html).show();
+    }
+
+    homepageSearchInput.on('input', function () {
+        const keyword = $(this).val().trim();
+        clearTimeout(searchDebounceTimer);
+
+        if (keyword.length < 2) {
+            hideSuggestions();
+            return;
+        }
+
+        searchDebounceTimer = setTimeout(function () {
+            if (searchXhr) {
+                searchXhr.abort();
+            }
+
+            searchXhr = $.ajax({
+                url: '/client/api/products/suggestions',
+                type: 'GET',
+                data: { keyword: keyword },
+                success: function (response) {
+                    renderSuggestions(response);
+                },
+                error: function () {
+                    hideSuggestions();
+                }
+            });
+        }, 220);
+    });
+
+    $(document).on('click', function (event) {
+        const inSearchArea = $(event.target).closest('#homepageSearchInput, #homepageSearchSuggestions').length > 0;
+        if (!inSearchArea) {
+            hideSuggestions();
+        }
     });
 
 

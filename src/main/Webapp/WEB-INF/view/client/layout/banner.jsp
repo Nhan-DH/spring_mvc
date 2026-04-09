@@ -10,7 +10,7 @@
                         <h4 class="mb-3 text-secondary">100% Genuine Laptop Products</h4>
                         <h1 class="mb-5 display-3 text-primary">Premium Laptops & Tech Devices</h1>
 
-                        <div class="position-relative mx-auto">
+                        <!-- <div class="position-relative mx-auto">
                             <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill"
                                 type="text" placeholder="Search laptops, brands, or accessories">
 
@@ -19,7 +19,7 @@
                                 style="top: 0; right: 25%;">
                                 Search
                             </button>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="col-md-12 col-lg-5">
