@@ -5,7 +5,8 @@
             <html lang="en">
 
             <head>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2220%22%20fill%3D%22%230A0A0A%22/%3E%3Cpath%20d%3D%22M%2020%2020%20h%2030%20a%2030%2030%200%200%201%2030%2030%20a%2030%2030%200%200%201%20-30%2030%20h%20-30%20v%20-60%20z%20M%2032%2032%20v%2036%20h%2018%20a%2018%2018%200%200%200%2018%20-18%20a%2018%2018%200%200%200%20-18%20-18%20h%20-18%20z%22%20fill%3D%22%232d2d2d%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%228%22%20fill%3D%22%230066FF%22/%3E%3C/svg%3E" />
+                <link rel="icon" type="image/svg+xml"
+                    href="data:image/svg+xml,%3Csvg%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2220%22%20fill%3D%22%230A0A0A%22/%3E%3Cpath%20d%3D%22M%2020%2020%20h%2030%20a%2030%2030%200%200%201%2030%2030%20a%2030%2030%200%200%201%20-30%2030%20h%20-30%20v%20-60%20z%20M%2032%2032%20v%2036%20h%2018%20a%2018%2018%200%200%200%2018%20-18%20a%2018%2018%200%200%200%20-18%20-18%20h%20-18%20z%22%20fill%3D%22%232d2d2d%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%228%22%20fill%3D%22%230066FF%22/%3E%3C/svg%3E" />
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -219,10 +220,10 @@
                                                     <div class="row">
                                                         <div class="col-lg-6 mb-3">
                                                             <div class="form-group"><label for="name"><i
-                                                                        class="fas fa-heading"></i> Product Name
-                                                                    *</label>
+                                                                        class="fas fa-heading"></i> Product Name *
+                                                                </label>
                                                                 <form:input type="text"
-                                                                    class="form-control ${not empty errorName ? ''is-invalid'' : ''''}"
+                                                                    class="form-control ${not empty errorName ? 'is-invalid' : ''}"
                                                                     id="name" placeholder="Enter product name"
                                                                     path="name" required="true" />${errorName}
                                                             </div>
@@ -231,7 +232,7 @@
                                                             <div class="form-group"><label for="price"><i
                                                                         class="fas fa-dollar-sign"></i> Price *</label>
                                                                 <form:input type="number"
-                                                                    class="form-control ${not empty errorPrice ? ''is-invalid'' : ''''}"
+                                                                    class="form-control ${not empty errorPrice ? 'is-invalid' : ''}"
                                                                     id="price" placeholder="Enter price" path="price"
                                                                     required="true" step="0.01" />${errorPrice}
                                                             </div>
@@ -243,7 +244,7 @@
                                                                         class="fas fa-quote-left"></i> Short Description
                                                                     *</label>
                                                                 <form:input type="text"
-                                                                    class="form-control ${not empty errorShortDesc ? ''is-invalid'' : ''''}"
+                                                                    class="form-control ${not empty errorShortDesc ? 'is-invalid' : ''}"
                                                                     id="shortDesc" placeholder="Brief description"
                                                                     path="shortDesc" required="true" />${errorShortDesc}
                                                             </div>
@@ -252,7 +253,7 @@
                                                             <div class="form-group"><label for="quantity"><i
                                                                         class="fas fa-cubes"></i> Quantity *</label>
                                                                 <form:input type="number"
-                                                                    class="form-control ${not empty errorQuantity ? ''is-invalid'' : ''''}"
+                                                                    class="form-control ${not empty errorQuantity ? 'is-invalid' : ''}"
                                                                     id="quantity" placeholder="Enter quantity"
                                                                     path="quantity" required="true" />${errorQuantity}
                                                             </div>
@@ -264,7 +265,7 @@
                                                                         class="fas fa-align-left"></i> Detailed
                                                                     Description *</label>
                                                                 <form:textarea
-                                                                    class="form-control ${not empty errorDetailDecs ? ''is-invalid'' : ''''}"
+                                                                    class="form-control ${not empty errorDetailDecs ? 'is-invalid' : ''}"
                                                                     id="detailDecs"
                                                                     placeholder="Enter detailed description"
                                                                     path="detailDecs" required="true" rows="4" />
@@ -301,8 +302,10 @@
                                                                     <form:option value="">-- Select Target --
                                                                     </form:option>
                                                                     <form:option value="GAMING">Gaming</form:option>
-                                                                    <form:option value="BUSINESS">Business</form:option>
+                                                                    <form:option value="OFFICE WORK">Office Work</form:option>
                                                                     <form:option value="STUDENT">Student</form:option>
+                                                                    <form:option value="DESIGN&Editing">Design & Editing</form:option>
+                                                                    <form:option value="DEVELOPMENT">Development</form:option>
                                                                 </form:select>
                                                             </div>
                                                         </div>
@@ -346,5 +349,3 @@
             </body>
 
             </html>
-
-
