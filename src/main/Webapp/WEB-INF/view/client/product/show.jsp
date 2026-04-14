@@ -144,6 +144,13 @@
                                         </div>
                                         <div class="col-4">
                                             <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" id="brand-hp"
+                                                    name="brand" value="HP">
+                                                <label class="form-check-label" for="brand-hp">HP</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-check">
                                                 <input type="checkbox" class="form-check-input" id="brand-lg"
                                                     name="brand" value="LG">
                                                 <label class="form-check-label" for="brand-lg">LG</label>

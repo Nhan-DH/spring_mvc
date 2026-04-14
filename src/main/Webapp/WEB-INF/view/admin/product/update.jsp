@@ -290,6 +290,9 @@
                                                                     <form:option value="Lenovo">Lenovo</form:option>
                                                                     <form:option value="Dell">Dell</form:option>
                                                                     <form:option value="Asus">Asus</form:option>
+                                                                    <form:option value="Acer">Acer</form:option>
+                                                                    <form:option value="HP">HP</form:option>
+                                                                    <form:option value="LG">LG</form:option>
                                                                 </form:select>
                                                             </div>
                                                         </div>

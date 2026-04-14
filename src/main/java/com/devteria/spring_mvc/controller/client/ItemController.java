@@ -273,10 +273,10 @@ public class ItemController {
             String sort = productCriteriaDTO.getSort().get();
 
             if (sort.equals("asc")) {
-                pageable = PageRequest.of(page - 1, 3, Sort.by(Product_.PRICE).ascending());
+                pageable = PageRequest.of(page - 1, 8, Sort.by(Product_.PRICE).ascending());
 
             } else if (sort.equals("desc")) {
-                pageable = PageRequest.of(page - 1, 3, Sort.by(Product_.PRICE).descending());
+                pageable = PageRequest.of(page - 1, 8, Sort.by(Product_.PRICE).descending());
 
             }
         }
