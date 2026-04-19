@@ -38,6 +38,114 @@
 
             <!-- Template Stylesheet -->
             <link href="/client/css/style.css" rel="stylesheet">
+
+            <!-- Custom styles for equal height cards -->
+            <style>
+                .vesitable-item {
+                    display: flex;
+                    flex-direction: column;
+                    height: 100%;
+                    min-height: 500px;
+                    font-family: 'Open Sans', sans-serif;
+                    text-align: center;
+                }
+
+                .vesitable-item .vesitable-img {
+                    height: 250px;
+                    overflow: hidden;
+                    flex-shrink: 0;
+                }
+
+                .vesitable-item .vesitable-img img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+                .vesitable-item .p-4 {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    text-align: center;
+                }
+
+                .vesitable-item h4 {
+                    font-family: 'Open Sans', sans-serif !important;
+                    text-align: center;
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: #212529;
+                }
+
+                .vesitable-item h4 a {
+                    text-decoration: none;
+                    color: inherit;
+                    font-family: 'Open Sans', sans-serif !important;
+                }
+
+                .vesitable-item h4 a:hover {
+                    color: #0d6efd;
+                }
+
+                .vesitable-item>.p-4>p {
+                    font-family: 'Open Sans', sans-serif !important;
+                    text-align: center;
+                    font-size: 14px;
+                    color: #6c757d;
+                }
+
+                .vesitable-item .text-dark.fs-5 {
+                    font-family: 'Open Sans', sans-serif !important;
+                    text-align: center;
+                    font-size: 22px !important;
+                    font-weight: 700 !important;
+                    color: #dc3545 !important;
+                }
+
+                .vesitable-item .d-flex.justify-content-between {
+                    margin-top: auto;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .vesitable-item .btnAddToCart {
+                    width: 100%;
+                    font-family: 'Open Sans', sans-serif;
+                }
+
+                .owl-carousel .owl-item {
+                    display: flex;
+                }
+
+                .owl-carousel .owl-item .vesitable-item {
+                    width: 100%;
+                }
+
+                /* Main product detail styling */
+                .col-lg-6 h4 {
+                    font-family: 'Open Sans', sans-serif !important;
+                    font-size: 24px !important;
+                    font-weight: 700 !important;
+                }
+
+                .col-lg-6 h5 {
+                    font-family: 'Open Sans', sans-serif !important;
+                    font-size: 22px !important;
+                    font-weight: 700 !important;
+                    color: #dc3545 !important;
+                }
+
+                .col-lg-6 p {
+                    font-family: 'Open Sans', sans-serif !important;
+                    font-size: 16px !important;
+                    color: #666 !important;
+                }
+
+                /* Hide carousel navigation buttons */
+                .owl-nav {
+                    display: none !important;
+                }
+            </style>
         </head>
 
         <body>
@@ -101,7 +209,7 @@
                                 <div class="col-lg-6">
                                     <h4 class="fw-bold mb-3">${product.name}</h4>
                                     <p class="mb-3">Category: ${product.factory}</p>
-                                    <h5 class="fw-bold mb-3">${product.price}</h5>
+                                    <h5 class="fw-bold mb-3">$${product.price}</h5>
                                     <div class="d-flex mb-4">
                                         <i class="fa fa-star text-secondary"></i>
                                         <i class="fa fa-star text-secondary"></i>
@@ -236,7 +344,8 @@
                                         <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
                                             style="top: 10px; right: 10px;">${rp.factory}</div>
                                         <div class="p-4 pb-0 rounded-bottom">
-                                            <h4>${rp.name}</h4>
+                                            <h4><a href="/client/product/${rp.id}"
+                                                    style="text-decoration: none; color: inherit;">${rp.name}</a></h4>
                                             <p>${rp.shortDesc}</p>
                                             <div class="d-flex justify-content-between flex-lg-wrap">
                                                 <p class="text-dark fs-5 fw-bold">$${rp.price}</p>
